@@ -1,0 +1,248 @@
+.main {
+  display: flex;
+  width: 100vw;
+  flex-shrink: 1;
+}
+
+.sidebar,
+.chat-list,
+.conversation {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+/**** SIDEBAR ONLY */
+
+.sidebar {
+  position: relative;
+  background-color: #030420;
+  width: min(25%, 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding-top: 10px;
+}
+
+.logo {
+  width: 70%;
+  padding: 15px 0;
+  border-radius: 10px;
+  background-color: #0c359e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.nav-icon {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 25px;
+  cursor: pointer;
+}
+
+.icon-badge {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #ffe3ca;
+  color: #0c0d34;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-family: cursive;
+  font-weight: bolder;
+}
+
+.call {
+  background-color: firebrick;
+  color: #fffc;
+}
+
+.active-indicator {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  background-color: #ffe3ca;
+}
+
+.sidebar-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+/**** CHAT LISTS ONLY */
+
+.chat-list {
+  /* background-color: #191a3e; */
+  width: min(75%, 300px);
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-list-header {
+  /* border-bottom: 0.3px solid #fff3; */
+  padding: 25px 0;
+}
+
+.chat-list-header-heading {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+
+.chat-list-header-heading-title {
+  color: #fff;
+  font-size: 1.3rem;
+  font-family: cursive;
+}
+
+.chat-list-header-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  height: 40px;
+  margin: 0 auto;
+  padding: 0 15px;
+  background-color: blanchedalmond;
+  border-radius: 10px;
+}
+
+.chat-list-header-search-search-input {
+  flex: 1;
+  border: none;
+  background-color: transparent;
+}
+.chat-list-header-search-search-input::placeholder {
+  font-size: 1rem;
+}
+
+.chat-list-chats {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-top: 30px;
+  color: #fff;
+  font-family: cursive;
+  gap: 15px;
+}
+
+.chat-list-chats-chat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 15px 20px;
+  width: 92%;
+  background-color: #2b264f;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.chat-list-chats-chat-overview {
+  margin-right: auto;
+  margin-left: 10px;
+  color: #fffc;
+}
+
+.chat-list-chats-chat-overview-name {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.chat-list-chats-chat-overview-recent {
+  font-size: 0.65rem;
+  margin-top: 5px;
+  color: #fffa;
+}
+
+.chat-list-chats-chat-details {
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.chat-list-chats-chat-details-time {
+  color: #fff7;
+}
+
+.chat-list-chats-chat-details-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: blanchedalmond;
+  color: #0c0d34;
+  padding: 5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  font-size: 0.55rem;
+}
+
+.chat-list-chats-chat-active {
+  background-color: #5755fe;
+}
+
+/****** MESSAGES ONLY **/
+.conversation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  height: 100vh;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  margin-left: 20px;
+}
+
+.conversation-messages {
+  background-color: #2b264f;
+  height: 90%;
+  width: 100%;
+  margin-top: auto;
+  border-radius: 15px;
+}
+
+.conversation-messages-lottie {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.conversation-messages-lottie-message {
+  color: #fffa;
+  font-family: cursive;
+  font-size: 1.3rem;
+  text-align: center;
+}
