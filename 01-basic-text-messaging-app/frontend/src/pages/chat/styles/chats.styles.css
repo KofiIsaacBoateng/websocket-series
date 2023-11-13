@@ -16,7 +16,7 @@
 .sidebar {
   position: relative;
   background-color: #030420;
-  width: min(25%, 80px);
+  width: min(15%, 80px);
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -97,9 +97,15 @@
 
 .chat-list {
   /* background-color: #191a3e; */
-  width: min(75%, 300px);
+  width: min(85%, 300px);
   display: flex;
   flex-direction: column;
+}
+
+@media screen and (max-width: 450px) {
+  .chat-list {
+    flex: 1;
+  }
 }
 
 .chat-list-header {
@@ -138,6 +144,7 @@
   flex: 1;
   border: none;
   background-color: transparent;
+  outline: none;
 }
 .chat-list-header-search-search-input::placeholder {
   font-size: 1rem;
@@ -221,6 +228,12 @@
   padding-right: 20px;
   padding-bottom: 20px;
   margin-left: 20px;
+}
+
+@media screen and (max-width: 550px) {
+  .conversation {
+    display: none;
+  }
 }
 
 .conversation-messages {

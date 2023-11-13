@@ -21,13 +21,11 @@ function Chat() {
       <ChatList />
       {/**** messages huge box */}
       <div className="conversation">
-        <div className="conversation-messages">
-          <div className="conversation-messages-lottie">
-            <Lottie style={{ height: "50%" }} options={defaultLottieOptions} />
-            <h2 className="conversation-messages-lottie-message">
-              Select a chat to start a conversation.
-            </h2>
-          </div>
+        <div className="conversation-messages-lottie">
+          <Lottie style={{ height: "50%" }} options={defaultLottieOptions} />
+          <h2 className="conversation-messages-lottie-message">
+            Select a chat to start a conversation.
+          </h2>
         </div>
       </div>
     </div>
