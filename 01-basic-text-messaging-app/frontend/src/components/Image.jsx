@@ -4,7 +4,7 @@ function Image({ src, style }) {
   const [loading, setLoading] = useState(false);
   return (
     <img
-      src={src}
+      src="../assets/photos/profile.jpg"
       style={style}
       onLoadStart={() => setLoading(false)}
       onLoad={() => setLoading(true)}

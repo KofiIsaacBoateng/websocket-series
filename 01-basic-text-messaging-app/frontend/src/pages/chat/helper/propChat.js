@@ -7,6 +7,7 @@ export default [
     recentMessageTime: "10:30",
     numberOfNewMessages: 2,
     gender: "girl",
+    profile: "../assets/photos/profile.jpg",
   },
   {
     id: 1,
@@ -16,6 +17,7 @@ export default [
     recentMessageTime: "15:20",
     numberOfNewMessages: 0,
     gender: "boy",
+    profile: "../assets/photos/profile-01.jpg",
   },
   {
     id: 2,
@@ -25,6 +27,7 @@ export default [
     recentMessageTime: "09:45",
     numberOfNewMessages: 1,
     gender: "boy",
+    profile: "../assets/photos/profile-02.jpg",
   },
   {
     id: 3,
@@ -34,6 +37,7 @@ export default [
     recentMessageTime: "11:15",
     numberOfNewMessages: 3,
     gender: "girl",
+    profile: "../assets/photos/profile-03.jpg",
   },
   {
     id: 4,
@@ -43,6 +47,7 @@ export default [
     recentMessageTime: "18:40",
     numberOfNewMessages: 0,
     gender: "boy",
+    profile: "../assets/photos/profile-04.jpg",
   },
   {
     id: 5,
@@ -52,6 +57,7 @@ export default [
     recentMessageTime: "17:55",
     numberOfNewMessages: 0,
     gender: "girl",
+    profile: "../assets/photos/profile-05.jpg",
   },
   {
     id: 6,
@@ -61,5 +67,6 @@ export default [
     recentMessageTime: "09:00",
     numberOfNewMessages: 2,
     gender: "boy",
+    profile: "../assets/photos/profile.jpg",
   },
 ];

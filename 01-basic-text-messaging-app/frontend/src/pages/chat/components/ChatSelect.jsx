@@ -1,16 +1,19 @@
 import React from "react";
 import Image from "../../../components/Image";
+import { useChatContext } from "../context/ChatContext";
 
-function ChatSelect({ chat, activeChat, setActiveChat }) {
+function ChatSelect({ chat }) {
+  const { selectedChat, updateSelectedChat } = useChatContext();
+  console.log(selectedChat);
   return (
     <div
       className={`chat-list-chats-chat ${
-        chat.id === activeChat.id && "chat-list-chats-chat-active"
+        chat.id === selectedChat?.id && "chat-list-chats-chat-active"
       }`}
-      onClick={() => setActiveChat(chat)}
+      onClick={() => updateSelectedChat(chat)}
     >
       <Image
-        src={`https://avatar.iran.liara.run/public/${chat.gender}/?username=${chat.name}`}
+        src={chat.profile}
         style={{
           width: "18%",
           aspectRatio: 1,

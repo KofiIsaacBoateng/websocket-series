@@ -9,7 +9,6 @@ import chats from "../helper/propChat";
 
 function ChatList() {
   const [search, setSearch] = useState("");
-  const [activeChat, setActiveChat] = useState({});
   return (
     <div className="chat-list">
       {/**** header */}
@@ -35,11 +34,7 @@ function ChatList() {
       {/*** chat lists */}
       <div className={`chat-list-chats `}>
         {chats.map((item, index) => (
-          <ChatSelect
-            chat={item}
-            activeChat={activeChat}
-            setActiveChat={setActiveChat}
-          />
+          <ChatSelect key={index} chat={item} />
         ))}
       </div>
     </div>
