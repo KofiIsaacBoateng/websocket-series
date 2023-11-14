@@ -9,9 +9,9 @@ const server = http.createServer(app);
 
 // connect to mongodb server local
 mongoose
-  .connect(process.env.MONGO_URI_LOCAL)
-  .catch((err) => console.error(err))
-  .finally(() => console.log("Connection to DB successful"));
+  .connect("mongodb://127.0.0.1:27017/chat")
+  .then(() => console.log("connection to db successful"))
+  .catch((err) => console.error(err));
 
 server.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
