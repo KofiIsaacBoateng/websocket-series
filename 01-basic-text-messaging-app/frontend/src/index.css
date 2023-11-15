@@ -13,3 +13,48 @@
 body {
   background-color: #030420;
 }
+
+@font-face {
+  font-family: Poppins;
+  src: url(./assets//fonts//Poppins/Poppins-Regular.ttf);
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url(./assets//fonts//Poppins/Poppins-Regular.ttf);
+}
+
+@font-face {
+  font-family: PoppinsLight;
+  src: url(./assets//fonts//Poppins/Poppins-Light.ttf);
+}
+
+@font-face {
+  font-family: PoppinsExtraLight;
+  src: url(./assets//fonts//Poppins/Poppins-ExtraLight.ttf);
+}
+
+@font-face {
+  font-family: PoppinsMedium;
+  src: url(./assets//fonts//Poppins/Poppins-Medium.ttf);
+}
+
+@font-face {
+  font-family: PoppinsBold;
+  src: url(./assets//fonts//Poppins/Poppins-Bold.ttf);
+}
+
+@font-face {
+  font-family: ExtraBold;
+  src: url(./assets//fonts//Poppins/Poppins-ExtraBold.ttf);
+}
+
+@font-face {
+  font-family: PoppinsSemiBold;
+  src: url(./assets//fonts//Poppins/Poppins-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: PoppinsThin;
+  src: url(./assets//fonts//Poppins/Poppins-Thin.ttf);
+}

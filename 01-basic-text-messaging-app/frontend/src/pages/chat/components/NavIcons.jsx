@@ -2,7 +2,10 @@ import React from "react";
 
 function NavIcons({ icon, badge, name, active, setActive }) {
   return (
-    <div onClick={() => setActive(name)} className="nav-icon">
+    <div
+      onClick={() => setActive(name)}
+      className={`nav-icon ${name === active ? "active-nav-icon" : ""}`}
+    >
       <div className="icon-badge">
         {icon}
         {badge && (

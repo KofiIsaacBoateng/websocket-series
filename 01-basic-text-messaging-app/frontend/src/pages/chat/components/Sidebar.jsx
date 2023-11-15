@@ -17,7 +17,7 @@ function Sidebar() {
       {/*** logo */}
 
       <div className="logo">
-        <IoMdChatbubbles size={22} color="#fffa" />
+        <IoMdChatbubbles size={18} color="#fffa" />
       </div>
       {/*** nav icons */}
       {/**** add */}
@@ -25,7 +25,7 @@ function Sidebar() {
         active={active}
         setActive={setActive}
         name="add"
-        icon={<GoPlus size={20} color="#fffa" />}
+        icon={<GoPlus size={18} color="#fffa" />}
         badge={null}
       />
       {/**** status */}
@@ -33,14 +33,14 @@ function Sidebar() {
         active={active}
         setActive={setActive}
         name="story"
-        icon={<LuCircleDotDashed size={20} color="#fffa" />}
+        icon={<LuCircleDotDashed size={18} color="#fffa" />}
         badge={null}
       />
       {/**** chat */}
       <NavIcons
         active={active}
         setActive={setActive}
-        icon={<BsChatText size={20} color="#fffa" />}
+        icon={<BsChatText size={18} color="#fffa" />}
         badge={8}
         name="chat"
       />
@@ -48,7 +48,7 @@ function Sidebar() {
       <NavIcons
         active={active}
         setActive={setActive}
-        icon={<IoPeopleOutline size={20} color="#fffa" />}
+        icon={<IoPeopleOutline size={18} color="#fffa" />}
         badge={12}
         name="community"
       />
@@ -57,7 +57,7 @@ function Sidebar() {
         active={active}
         setActive={setActive}
         name="call"
-        icon={<IoCallOutline size={20} color="#fffa" />}
+        icon={<IoCallOutline size={18} color="#fffa" />}
         badge={2}
       />
 
