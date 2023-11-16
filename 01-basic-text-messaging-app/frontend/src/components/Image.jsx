@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 
-function Image({ src, style }) {
+function Image({ src, style, status, imageStyle }) {
   const [loading, setLoading] = useState(false);
   return (
-    <img
-      src={src}
-      style={style}
-      onLoadStart={() => setLoading(false)}
-      onLoad={() => setLoading(true)}
-    />
+    <div style={style} className="custom-image">
+      {status && <div className="custom-image-badge" />}
+      <img
+        className="custom-image-img"
+        src={src}
+        style={imageStyle}
+        onLoadStart={() => setLoading(false)}
+        onLoad={() => setLoading(true)}
+      />
+    </div>
   );
 }
 

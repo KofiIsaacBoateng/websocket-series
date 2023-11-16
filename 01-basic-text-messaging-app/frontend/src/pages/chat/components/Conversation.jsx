@@ -12,13 +12,31 @@ import { GrFormAttachment } from "react-icons/gr"; // attach
 import { GrAttachment } from "react-icons/gr";
 import { HiOutlineMicrophone } from "react-icons/hi2"; // microphone
 import { VscSend } from "react-icons/vsc"; // send
+import { useChatContext } from "../context/ChatContext";
+import MainChat from "./MainChat";
 
 function Conversation({ chat }) {
   const [message, setMessage] = useState("");
+  const { selectedChat, messages, updateMessages } = useChatContext();
   const defaultLottieOptions = {
     loop: true,
     autoplay: true,
     animationData: animationData,
+  };
+
+  const sendMessage = () => {
+    if (message.length === 0) return;
+
+    const date = new Date(Date.now());
+    const hour = date.getHours();
+    const minutes = date.getMinutes();
+    updateMessages({
+      sender: "Bob",
+      receiver: selectedChat.name,
+      message,
+      timestamp: `${hour}: ${minutes}`,
+    });
+    setMessage("");
   };
 
   return (
@@ -35,6 +53,12 @@ function Conversation({ chat }) {
               aspectRatio: 1,
               borderRadius: 100,
               objectFit: "cover",
+            }}
+            imageStyle={{
+              width: "100%",
+              aspectRatio: 1,
+              objectFit: "cover",
+              borderRadius: 50,
             }}
           />
           {/*** name / online status */}
@@ -67,12 +91,18 @@ function Conversation({ chat }) {
       </div>
 
       {/*** main */}
-      <div className="message-panel-main">
-        <Lottie style={{ height: 200 }} options={defaultLottieOptions} />
-        <h2 className="conversation-messages-lottie-message">
-          Say hello to {chat.name}
-        </h2>
-      </div>
+      {messages.length > 0 &&
+      (selectedChat.name === messages[0].sender ||
+        selectedChat.name === messages[0].receiver) ? (
+        <MainChat />
+      ) : (
+        <div className="message-panel-main">
+          <Lottie style={{ height: 200 }} options={defaultLottieOptions} />
+          <h2 className="conversation-messages-lottie-message">
+            Say hello to {chat.name}
+          </h2>
+        </div>
+      )}
 
       {/*** footer */}
       <div className="message-panel-footer">
@@ -96,7 +126,7 @@ function Conversation({ chat }) {
         {/*** record / send */}
         <div className="message-panel-footer-icons">
           {message.length > 0 ? (
-            <VscSend size={17} color="#fffd" />
+            <VscSend onClick={() => sendMessage()} size={17} color="#fffd" />
           ) : (
             <HiOutlineMicrophone size={17} color="#fffd" />
           )}

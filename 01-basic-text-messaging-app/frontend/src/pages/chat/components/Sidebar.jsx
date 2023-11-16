@@ -77,6 +77,12 @@ function Sidebar() {
             borderRadius: 100,
             objectFit: "cover",
           }}
+          imageStyle={{
+            width: "100%",
+            aspectRatio: 1,
+            objectFit: "cover",
+            borderRadius: 50,
+          }}
         />
       </div>
     </div>

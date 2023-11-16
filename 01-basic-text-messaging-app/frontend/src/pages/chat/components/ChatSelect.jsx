@@ -4,7 +4,6 @@ import { useChatContext } from "../context/ChatContext";
 
 function ChatSelect({ chat }) {
   const { selectedChat, updateSelectedChat } = useChatContext();
-  console.log(selectedChat);
   return (
     <div
       className={`chat-list-chats-chat ${
@@ -15,11 +14,17 @@ function ChatSelect({ chat }) {
       <Image
         src={chat.profile}
         style={{
-          width: "18%",
           aspectRatio: 1,
           borderRadius: 100,
-          objectFit: "cover",
+          width: "18%",
         }}
+        imageStyle={{
+          width: "100%",
+          aspectRatio: 1,
+          objectFit: "cover",
+          borderRadius: 50,
+        }}
+        status={chat.onlineStatus}
       />
       <div className="chat-list-chats-chat-overview">
         <h5 className="chat-list-chats-chat-overview-name">{chat.name}</h5>

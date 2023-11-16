@@ -15,7 +15,7 @@
 .sidebar {
   position: relative;
   background-color: #030420;
-  width: min(10%, 50px);
+  width: 60px;
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -24,6 +24,7 @@
 
 .logo {
   width: 70%;
+  aspect-ratio: 1;
   padding: 15px 0;
   border-radius: 10px;
   background-color: #0c359e;
