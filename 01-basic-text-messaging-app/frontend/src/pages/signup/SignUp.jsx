@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import Lottie from "react-lottie";
 import animationData from "../../assets/lottie/lottie-05.json";
+import Input from "./components/Input";
+import signupValidationSchema from "./utils/validationSchema";
+import { NavLink } from "react-router-dom";
+import { useUserContext } from "../../context/UserContext";
 
 //css
 import "./styles/signup.styles.css";
@@ -9,9 +13,9 @@ import "./styles/signup.styles.css";
 // icons
 import { LuAtSign } from "react-icons/lu"; // username
 import { IoLockClosedOutline } from "react-icons/io5"; // lock
-import Input from "./components/Input";
 
 function SignUp() {
+  const { updateUser, user } = useUserContext();
   const defaultLottieOptions = {
     loop: true,
     autoplay: true,
@@ -21,13 +25,11 @@ function SignUp() {
     initialValues: {
       username: "",
       password: "",
-      passwordConfirm: "",
+      confirmPassword: "",
     },
-    validate: () => null,
-    onSubmit: () => null,
+    validationSchema: signupValidationSchema,
+    onSubmit: updateUser,
   });
-
-  console.log(formik.values.username);
 
   return (
     <div className="signup">
@@ -37,15 +39,31 @@ function SignUp() {
       </div>
       {/**** form */}
       <form className="signup-form">
-        <h1 className="signup-form-heading">Create Account</h1>
-        <p className="signup-form-description">Let's get you setup.</p>
+        <h1 className="signup-form-heading">Let's get you setup</h1>
+        <div className="signup-form-description">
+          <p className="signup-form-alt">Already have an account?</p>
+          <NavLink className="signup-form-alt-link" to="/login">
+            Login
+          </NavLink>
+        </div>
 
         {/**** username */}
         <Input
           name="username"
           formik={formik}
           type="text"
-          icon={<LuAtSign size={15} color="#fff" />}
+          icon={
+            <LuAtSign
+              size={15}
+              color={
+                !formik.touched.username
+                  ? "#fff"
+                  : formik.errors.username
+                  ? "red"
+                  : "lime"
+              }
+            />
+          }
           label="username"
         />
 
@@ -54,7 +72,18 @@ function SignUp() {
           name="password"
           formik={formik}
           type="password"
-          icon={<IoLockClosedOutline size={15} color="#fff" />}
+          icon={
+            <IoLockClosedOutline
+              size={15}
+              color={
+                !formik.touched.password
+                  ? "#fff"
+                  : formik.errors.password
+                  ? "red"
+                  : "lime"
+              }
+            />
+          }
           label="password"
         />
 
@@ -63,12 +92,25 @@ function SignUp() {
           name="confirmPassword"
           formik={formik}
           type="password"
-          icon={<IoLockClosedOutline size={15} color="#fff" />}
+          icon={
+            <IoLockClosedOutline
+              size={15}
+              color={
+                !formik.touched.confirmPassword
+                  ? "#fff"
+                  : formik.errors.confirmPassword
+                  ? "red"
+                  : "lime"
+              }
+            />
+          }
           label="confirm password"
         />
 
         {/**** call to action */}
-        <div className="signup-form-submit">Create account</div>
+        <div onClick={formik.submitForm} className="signup-form-submit">
+          Create account
+        </div>
       </form>
     </div>
   );

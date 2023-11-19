@@ -42,44 +42,14 @@
 .signup-form-description {
   font-size: 0.9rem;
   margin: 10px 0 30px 0;
-}
-
-.input {
-  position: relative;
   display: flex;
+  gap: 5px;
   align-items: center;
-  width: 100%;
-  margin-top: 30px;
 }
 
-.input-label {
-  position: absolute;
-  left: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-left: 20px;
-  z-index: 3;
-  background-color: #030420;
-  transition: transform 0.3s ease-out;
-}
-
-.input-label.opened {
-  transform: translateY(-28px);
-}
-
-.input-label-text {
-  font-size: 0.85rem;
-}
-
-.input-input {
-  width: 100%;
-  padding: 15px 25px;
-  font-size: 1rem;
-  color: #fff;
-  border: 0.5px solid #fffc;
-  border-radius: 5px;
-  z-index: 1;
+.signup-form-alt-link {
+  text-decoration: none;
+  color: #8000ff;
 }
 
 .signup-form-submit {
@@ -89,6 +59,7 @@
   border-radius: 5px;
   margin-top: 40px;
   cursor: pointer;
+  font-family: "PoppinsSemiBold";
 }
 
 .signup-form-submit:hover {
