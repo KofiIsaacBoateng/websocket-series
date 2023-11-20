@@ -1,0 +1,68 @@
+const User = require("../models/user");
+const AsyncWrapper = require("../utils/AsyncWrapper");
+const { StatusCodes } = require("http-status-codes");
+const jwt = require("jsonwebtoken");
+
+const registerToken = (_id) => {
+  return jwt.sign({ _id }, "justsomerandomsecret", { expiresIn: "1h" });
+};
+
+const sendLoginCredentials = (user, res, statusCode) => {
+  /**** sign token */
+  const token = registerToken(user._id);
+
+  res.status(statusCode).json({
+    success: true,
+    data: user,
+    token,
+  });
+};
+
+module.exports.register = AsyncWrapper(async (req, res) => {
+  const { username, password, confirmPassword } = req.body;
+
+  if (!username || !password || !confirmPassword) {
+    throw new Error("username, password, and confirm password cannot be empty");
+  }
+
+  const exists = await User.findOne({ username });
+
+  if (exists) {
+    throw new Error("Account already exists! Please login.");
+  }
+
+  const user = await User.create({
+    username,
+    password,
+    confirmPassword,
+  });
+
+  // log user in
+  sendLoginCredentials(user, res, StatusCodes.CREATED);
+});
+
+module.exports.login = AsyncWrapper(async (req, res) => {
+  const { password, username } = req.body;
+
+  // verify inputs
+  if (!password || !username) {
+    throw new Error("username and password is required");
+  }
+
+  // check if user exists
+  const user = await User.findOne({ username }).select("+password");
+
+  if (!user) {
+    throw new Error("Invalid username or password");
+  }
+
+  // verify password
+  const verifiedPassword = await user.verifyPassword(password, user.password);
+  console.log(verifiedPassword);
+
+  if (!verifiedPassword) {
+    throw new Error("Invalid username or password");
+  }
+
+  sendLoginCredentials(user, res, StatusCodes.OK);
+});
