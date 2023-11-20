@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const validator = require("validator");
 
 const userSchema = new mongoose.Schema(
   {
-    _id: {
-      type: mongoose.Schema.ObjectId,
-      required: true,
-    },
     username: {
       type: String,
       minLength: [4, "username must be at least 4 characters"],
@@ -15,9 +14,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "password is required"],
       minLength: [8, "password must be at least 8 characters"],
+      select: false,
     },
 
-    passwordConfirm: {
+    confirmPassword: {
       type: String,
       required: [true, "password is required"],
       minLength: [8, "password must be at least 8 characters"],
@@ -36,5 +36,25 @@ const userSchema = new mongoose.Schema(
     virtuals: true,
   }
 );
+
+userSchema.methods.verifyPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+// document middleware
+userSchema.pre("save", async function (next) {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+
+  this.confirmPassword = undefined;
+  next();
+});
+
+// query middlewares
+
+// aggregate middlewares
 
 module.exports = mongoose.model("Chat", userSchema);

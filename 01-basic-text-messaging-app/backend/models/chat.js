@@ -2,13 +2,18 @@ const mongoose = require("mongoose");
 
 const chatSchema = new mongoose.Schema(
   {
-    _id: {
-      type: mongoose.Schema.ObjectId,
+    users: {
+      type: [
+        {
+          type: mongoose.Schema.ObjectId,
+          ref: "user",
+        },
+      ],
       required: true,
     },
-    users: {
-      type: [String],
-      required: true,
+    groupChat: {
+      type: Boolean,
+      default: false,
     },
   },
   {
