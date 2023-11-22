@@ -57,4 +57,4 @@ userSchema.pre("save", async function (next) {
 
 // aggregate middlewares
 
-module.exports = mongoose.model("Chat", userSchema);
+module.exports = mongoose.model("User", userSchema);

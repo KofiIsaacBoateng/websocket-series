@@ -1,3 +1,4 @@
+const { BadRequestError, UnAuthorizedError } = require("../errors");
 const User = require("../models/user");
 const AsyncWrapper = require("../utils/AsyncWrapper");
 const { StatusCodes } = require("http-status-codes");
@@ -8,6 +9,9 @@ const registerToken = (_id) => {
 };
 
 const sendLoginCredentials = (user, res, statusCode) => {
+  // remove password before sending credentials
+  user.password = undefined;
+
   /**** sign token */
   const token = registerToken(user._id);
 
@@ -22,13 +26,15 @@ module.exports.register = AsyncWrapper(async (req, res) => {
   const { username, password, confirmPassword } = req.body;
 
   if (!username || !password || !confirmPassword) {
-    throw new Error("username, password, and confirm password cannot be empty");
+    throw new BadRequestError(
+      "username, password, and confirm password cannot be empty"
+    );
   }
 
   const exists = await User.findOne({ username });
 
   if (exists) {
-    throw new Error("Account already exists! Please login.");
+    throw new UnAuthorizedError("Account already exists! Please login.");
   }
 
   const user = await User.create({
@@ -37,7 +43,7 @@ module.exports.register = AsyncWrapper(async (req, res) => {
     confirmPassword,
   });
 
-  // log user in
+  // send login credentials
   sendLoginCredentials(user, res, StatusCodes.CREATED);
 });
 
@@ -46,14 +52,14 @@ module.exports.login = AsyncWrapper(async (req, res) => {
 
   // verify inputs
   if (!password || !username) {
-    throw new Error("username and password is required");
+    throw new BadRequestError("username and password is required");
   }
 
   // check if user exists
   const user = await User.findOne({ username }).select("+password");
 
   if (!user) {
-    throw new Error("Invalid username or password");
+    throw new UnAuthorizedError("Invalid username or password");
   }
 
   // verify password
@@ -61,8 +67,22 @@ module.exports.login = AsyncWrapper(async (req, res) => {
   console.log(verifiedPassword);
 
   if (!verifiedPassword) {
-    throw new Error("Invalid username or password");
+    throw new UnAuthorizedError("Invalid username or password");
   }
 
+  // send login credentials
   sendLoginCredentials(user, res, StatusCodes.OK);
+});
+
+module.exports.usernameExists = AsyncWrapper(async (req, res) => {
+  const { username } = req.body;
+
+  if (!username) throw new BadRequestError("username isn't provided");
+
+  const user = await User.findOne({ username });
+
+  res.status(StatusCodes.OK).json({
+    success: true,
+    exists: user ? true : false,
+  });
 });
