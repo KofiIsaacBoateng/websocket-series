@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    chatId: {
+      type: mongoose.Schema.ObjectId,
+      ref: "chat",
+    },
   },
   {
     timestamps: true,
