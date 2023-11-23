@@ -13,16 +13,19 @@
 
 body {
   background-color: #030420;
+  color: #fff;
 }
 
-input {
+input,
+button {
   outline: none;
   border: none;
   background-color: #030420;
 }
 
 input:focus,
-input:active {
+input:active,
+button:active {
   outline: none;
 }
 

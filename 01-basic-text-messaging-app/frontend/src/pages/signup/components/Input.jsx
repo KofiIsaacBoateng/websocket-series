@@ -7,10 +7,27 @@ import "../styles/input.styles.css";
 import { FaTimes } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
 
-function Input({ name, label, formik, type, icon }) {
+function Input({
+  name,
+  label,
+  formik,
+  type,
+  icon,
+  usernameExists,
+  usernameTaken,
+  setUsernameTaken,
+}) {
   const [used, setUsed] = useState(false);
   const error = formik.errors[name] ? true : false;
   const touched = formik.touched[name];
+
+  const handleUsernameInput = async ({ target: { value } }) => {
+    formik.setFieldValue("username", value);
+    if (value === "") return;
+    const taken = await usernameExists(value);
+    setUsernameTaken(taken);
+  };
+
   return (
     <label className="input">
       <div
@@ -20,7 +37,11 @@ function Input({ name, label, formik, type, icon }) {
         {icon && icon}
         <p
           className={`input-label-text ${
-            !touched ? "#fff" : error ? "error-text" : "success-text"
+            !touched
+              ? "#fff"
+              : error || usernameTaken
+              ? "error-text"
+              : "success-text"
           }`}
         >
           {label}
@@ -30,18 +51,20 @@ function Input({ name, label, formik, type, icon }) {
         type={type}
         name={name}
         value={formik.values[name]}
-        onChange={formik.handleChange}
+        onChange={
+          name === "username" ? handleUsernameInput : formik.handleChange
+        }
         onBlur={formik.handleBlur}
         autoComplete="off"
         className={`input-input ${
-          !touched ? "#fff" : error ? "error" : "success"
+          !touched ? "#fff" : error || usernameTaken ? "error" : "success"
         }`}
         onFocus={() => setUsed(true)}
       />
 
       {!touched ? (
         <></>
-      ) : error ? (
+      ) : error || usernameTaken ? (
         <div className="status-icon error">
           <FaTimes size={12} color="#fff" />
         </div>
@@ -49,6 +72,19 @@ function Input({ name, label, formik, type, icon }) {
         <div className="status-icon success">
           <FaCheck size={12} color="#fff" />
         </div>
+      )}
+
+      {used && error && (
+        <div className="error-message">{formik.errors[name]}</div>
+      )}
+      {!used || name !== "username" || error ? (
+        <></>
+      ) : usernameTaken ? (
+        <div className="error-message">username already taken</div>
+      ) : usernameTaken === false ? (
+        <div className="success-message">unique username</div>
+      ) : (
+        <></>
       )}
     </label>
   );

@@ -23,9 +23,9 @@ const sendLoginCredentials = (user, res, statusCode) => {
 };
 
 module.exports.register = AsyncWrapper(async (req, res) => {
-  const { username, password, confirmPassword } = req.body;
+  const { username, password, confirmPassword, name } = req.body;
 
-  if (!username || !password || !confirmPassword) {
+  if (!username || !password || !confirmPassword || !name) {
     throw new BadRequestError(
       "username, password, and confirm password cannot be empty"
     );
@@ -38,6 +38,7 @@ module.exports.register = AsyncWrapper(async (req, res) => {
   }
 
   const user = await User.create({
+    name,
     username,
     password,
     confirmPassword,
