@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ChatSelect from "./ChatSelect";
 import chats from "../helper/propChat";
+import NewChatModal from "./NewChatModal";
 
 /*** ICONS */
 import { BsFillMoonStarsFill } from "react-icons/bs";
@@ -11,6 +12,8 @@ import { IoFilter } from "react-icons/io5";
 
 function ChatList() {
   const [search, setSearch] = useState("");
+  const [openNewChatModal, setOpenNewChatModal] = useState(false);
+
   return (
     <div className="chat-list">
       {/**** header */}
@@ -19,7 +22,10 @@ function ChatList() {
         <div className="chat-list-header-heading">
           <h4 className="chat-list-header-heading-title">Chats</h4>
           <div className="chat-list-header-right-controls">
-            <div className="chat-list-header-right-controls-control">
+            <div
+              onClick={() => setOpenNewChatModal((prev) => !prev)}
+              className="chat-list-header-right-controls-control"
+            >
               <FaRegPenToSquare size={15} color="#fffa" />
             </div>
             <div className="chat-list-header-right-controls-control">
@@ -28,6 +34,7 @@ function ChatList() {
             <div className="chat-list-header-right-controls-control">
               <FiSun size={15} color="#fffa" />
             </div>
+            {openNewChatModal && <NewChatModal />}
           </div>
         </div>
         {/*** search */}
@@ -35,12 +42,12 @@ function ChatList() {
           <input
             type="text"
             name="search"
-            placeholder="search"
+            placeholder="search chat"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="chat-list-header-search-search-input"
           />
-          <CiSearch size={18} color="#0c0d34" />
+          <CiSearch size={18} color="#fff" />
         </div>
       </div>
       {/*** chat lists */}

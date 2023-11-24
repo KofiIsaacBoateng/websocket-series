@@ -21,7 +21,13 @@ function ChatContext({ children }) {
 
   return (
     <Chat.Provider
-      value={{ selectedChat, updateSelectedChat, messages, updateMessages }}
+      value={{
+        selectedChat,
+        updateSelectedChat,
+        messages,
+        updateMessages,
+        setMessages,
+      }}
     >
       {children}
     </Chat.Provider>

@@ -134,6 +134,7 @@
 
 .chat-list-header-right-controls {
   display: flex;
+  position: relative;
 }
 
 .chat-list-header-right-controls-control {
@@ -157,11 +158,13 @@
   align-items: center;
   justify-content: space-between;
   width: 90%;
-  height: 40px;
-  margin: 0 auto;
-  padding: 0 15px;
-  background-color: blanchedalmond;
-  border-radius: 10px;
+  margin: auto;
+  padding: 10px 10px;
+  border-bottom: 1px solid #fffa;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 0.7rem;
+  background-color: #2b264f;
 }
 
 .chat-list-header-search-search-input {
@@ -169,9 +172,10 @@
   border: none;
   background-color: transparent;
   outline: none;
+  color: #fff
 }
 .chat-list-header-search-search-input::placeholder {
-  font-size: 1rem;
+  font-size: .7rem;
 }
 
 .chat-list-chats {

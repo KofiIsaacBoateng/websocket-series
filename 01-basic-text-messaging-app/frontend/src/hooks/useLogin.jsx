@@ -27,9 +27,7 @@ function useLogin() {
       toast.error(message);
     }
 
-    setTimeout(() => {
-      setLoading((prev) => false);
-    }, [3000]);
+    setLoading((prev) => false);
   };
   return [loading, login];
 }
