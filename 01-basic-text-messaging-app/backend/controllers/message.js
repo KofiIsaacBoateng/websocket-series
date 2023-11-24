@@ -14,20 +14,21 @@ const getMessages = AsyncWrapper(async (req, res) => {
 
   // get chat the messages belong to
   let chat = await Chat.findOne({
-    users: [userId, receiverId],
-  });
+    users: { $all: [userId, receiverId] },
+  })
+    .populate("users")
+    .populate("messages");
 
   // create a new chat if the chat doesn't exist
   if (!chat) {
     chat = await Chat.create({ users: [userId, receiverId] });
-  }
 
-  // get all messages
-  const messages = await Message.find({ chatId: chat._id });
+    await chat.populate("users").populate("messages");
+  }
 
   res.status(StatusCodes.OK).json({
     success: true,
-    data: messages,
+    data: chat,
   });
 });
 
@@ -41,12 +42,14 @@ const createMessage = AsyncWrapper(async (req, res) => {
     );
   }
 
-  const newMessage = await Message.create({
+  let newMessage = await Message.create({
     sender,
     receiver,
     message,
     chatId,
   });
+
+  newMessage = await Message.findById(newMessage._id);
 
   res.status(StatusCodes.CREATED).json({
     success: true,

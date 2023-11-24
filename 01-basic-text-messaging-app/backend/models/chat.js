@@ -2,15 +2,13 @@ const mongoose = require("mongoose");
 
 const chatSchema = new mongoose.Schema(
   {
-    users: {
-      type: [
-        {
-          type: mongoose.Schema.ObjectId,
-          ref: "user",
-        },
-      ],
-      required: true,
-    },
+    users: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: true,
+      },
+    ],
     groupChat: {
       type: Boolean,
       default: false,
@@ -18,12 +16,15 @@ const chatSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    toJSON: true,
-    toObject: true,
-    virtuals: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
 
-// chatSchema.virtual("messages").get()
+chatSchema.virtual("messages", {
+  ref: "Message",
+  foreignField: "chatId",
+  localField: "_id",
+});
 
 module.exports = mongoose.model("Chat", chatSchema);

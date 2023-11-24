@@ -21,7 +21,6 @@ const protect = AsyncWrapper(async (req, res, next) => {
       throw new UnAuthorizedError("Invalid token! Please login.");
     }
 
-    console.log(decoded);
     req.userId = decoded._id;
     next();
   } catch (error) {

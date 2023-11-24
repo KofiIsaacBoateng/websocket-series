@@ -37,11 +37,15 @@ module.exports.register = AsyncWrapper(async (req, res) => {
     throw new UnAuthorizedError("Account already exists! Please login.");
   }
 
+  // auto set user profile
+  const profile = `https://avatar.iran.liara.run/public?username=${username}`;
+
   const user = await User.create({
     name,
     username,
     password,
     confirmPassword,
+    profile,
   });
 
   // send login credentials

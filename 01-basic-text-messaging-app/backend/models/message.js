@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
+const messageSchema = new mongoose.Schema(
   {
     sender: {
       type: mongoose.Schema.ObjectId,
-      ref: "user",
+      ref: "User",
       required: true,
     },
     receiver: {
       type: mongoose.Schema.ObjectId,
-      ref: "user",
+      ref: "User",
       required: true,
     },
     message: {
@@ -18,15 +18,21 @@ const userSchema = new mongoose.Schema(
     },
     chatId: {
       type: mongoose.Schema.ObjectId,
-      ref: "chat",
+      ref: "Chat",
+      required: [true, "message must belong to a chat"],
     },
   },
   {
     timestamps: true,
-    toJSON: true,
-    toObject: true,
-    virtuals: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
 
-module.exports = mongoose.model("Message", userSchema);
+messageSchema.pre(/^find/, function (next) {
+  this.populate("sender");
+  this.populate("receiver");
+  next();
+});
+
+module.exports = mongoose.model("Message", messageSchema);
