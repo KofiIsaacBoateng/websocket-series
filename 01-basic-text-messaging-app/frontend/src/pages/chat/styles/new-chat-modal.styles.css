@@ -1,0 +1,97 @@
+.add-chat {
+  display: flex;
+  flex-direction: column;
+  width: min(300px, 90vw);
+  height: min(500px, 70vh);
+  z-index: 2;
+  position: absolute;
+  top: 110%;
+  left: 15px;
+  background-color: #080a2e;
+  border-radius: 10px;
+  box-shadow: 0 0 5px 0.5px #0003;
+  padding: 15px 25px 0;
+  animation: slide-down 0.2s ease-in;
+}
+
+.add-chat-heading {
+  font-size: 1.15rem;
+  color: #fffd;
+  margin-bottom: 15px;
+}
+
+.add-chat-search {
+  margin-bottom: 15px;
+}
+
+.add-chat-search input {
+  width: 100%;
+  padding: 10px 10px;
+  border-bottom: 1px solid #fffa;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 0.7rem;
+  background-color: #2b264f;
+}
+
+input::placeholder {
+  color: #fffa;
+}
+
+.add-chat-users {
+  width: 100%;
+  flex: 1;
+  overflow-y: scroll;
+  margin-top: 15px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add-chat-users-list {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 15px 10px;
+  border-radius: 5px;
+}
+
+.add-chat-users-list:hover {
+  background-color: #2b264f;
+}
+
+.add-chat-users-list-details {
+  margin-right: auto;
+}
+
+.add-chat-users-list-details-name {
+  color: #fff;
+  font-size: 0.85rem;
+  font-family: "PoppinsLight";
+}
+
+.add-chat-users-list-details-username {
+  font-size: 0.65rem;
+  color: #fff9;
+  margin-top: 3px;
+}
+
+.add-chat-users-list-status {
+  font-size: 0.7rem;
+  color: #fffa;
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-30px);
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+  }
+}
