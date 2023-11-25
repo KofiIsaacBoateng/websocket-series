@@ -5,6 +5,7 @@ const Chat = createContext();
 
 function ChatContext({ children }) {
   const [selectedChat, setSelectedChat] = useState(undefined);
+  const [conversationOther, setConversationOther] = useState(undefined);
   const [messages, setMessages] = useState([...initialMessages]);
 
   const updateSelectedChat = (chat) => {
@@ -27,6 +28,8 @@ function ChatContext({ children }) {
         messages,
         updateMessages,
         setMessages,
+        conversationOther,
+        setConversationOther,
       }}
     >
       {children}

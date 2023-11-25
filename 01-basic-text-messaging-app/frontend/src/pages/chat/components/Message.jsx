@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import Image from "../../../components/Image";
-import { useChatContext } from "../context/ChatContext";
+import { useUserContext } from "../../../context/UserContext";
 
 function Message({ message }) {
-  const { selectedChat } = useChatContext();
+  const { user } = useUserContext();
   const messageRef = useRef(null);
+  const date = new Date(message.createdAt);
+  const timestamp = `${date.getHours()} : ${date.getMinutes()}`;
 
   useEffect(() => {
     messageRef.current?.scrollIntoView({ behavior: "instant" });
@@ -13,15 +15,15 @@ function Message({ message }) {
     <div
       ref={messageRef}
       className={`message ${
-        message.sender === selectedChat.name ? "receiver" : "sender"
+        message.sender._id === user._id ? "sender" : "receiver"
       }`}
     >
       {/**** photo */}
       <Image
         src={
-          message.sender === selectedChat.name
-            ? selectedChat.profile
-            : "https://avatar.iran.liara.run/public/boy"
+          message.sender._id === user._id
+            ? user.profile
+            : message.receiver.profile
         }
         style={{
           flex: 0.1,
@@ -40,7 +42,7 @@ function Message({ message }) {
       {/*** message */}
       <div className="message-text-container">
         <p className="message-text">{message.message}</p>
-        <p className="message-timestamp">{message.timestamp}</p>
+        <p className="message-timestamp">{timestamp}</p>
       </div>
     </div>
   );

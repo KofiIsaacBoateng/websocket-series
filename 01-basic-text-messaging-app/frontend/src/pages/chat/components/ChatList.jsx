@@ -34,7 +34,9 @@ function ChatList() {
             <div className="chat-list-header-right-controls-control">
               <FiSun size={15} color="#fffa" />
             </div>
-            {openNewChatModal && <NewChatModal />}
+            {openNewChatModal && (
+              <NewChatModal setOpenNewChatModal={setOpenNewChatModal} />
+            )}
           </div>
         </div>
         {/*** search */}

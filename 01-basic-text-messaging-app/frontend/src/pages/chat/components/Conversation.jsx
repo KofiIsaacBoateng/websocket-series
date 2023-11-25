@@ -8,17 +8,18 @@ import { CiVideoOn } from "react-icons/ci"; // video call
 import { IoCallOutline } from "react-icons/io5"; // voice call
 import { LiaSearchSolid } from "react-icons/lia"; // search
 import { LuSmilePlus } from "react-icons/lu"; // smiley
-import { GrFormAttachment } from "react-icons/gr"; // attach
-import { GrAttachment } from "react-icons/gr";
+import { GrAttachment } from "react-icons/gr"; // attachment
 import { HiOutlineMicrophone } from "react-icons/hi2"; // microphone
 import { VscSend } from "react-icons/vsc"; // send
 import { useChatContext } from "../context/ChatContext";
 import MainChat from "./MainChat";
 import useSendMessage from "../../../hooks/useSendMessage";
+import { useUserContext } from "../../../context/UserContext";
 
-function Conversation({ chat }) {
+function Conversation() {
   const [message, setMessage] = useState("");
-  const { selectedChat, messages } = useChatContext();
+  const { user } = useUserContext();
+  const { selectedChat, messages, conversationOther } = useChatContext();
   const [loading, sendMessage] = useSendMessage();
 
   const defaultLottieOptions = {
@@ -35,7 +36,7 @@ function Conversation({ chat }) {
         <div className="message-panel-header-profile">
           {/*** profile image */}
           <Image
-            src={chat.profile}
+            src={conversationOther.profile}
             style={{
               width: 37,
               aspectRatio: 1,
@@ -51,13 +52,15 @@ function Conversation({ chat }) {
           />
           {/*** name / online status */}
           <div className="message-panel-header-profile-name-online">
-            <p className="message-panel-header-profile-name">{chat.name}</p>
+            <p className="message-panel-header-profile-name">
+              {conversationOther.name}
+            </p>
             <p
               className={`message-panel-header-profile-online ${
-                chat.onlineStatus ? "green" : "gray"
+                false ? "green" : "gray"
               }`}
             >
-              {chat.onlineStatus ? "online" : "offline"}
+              {false ? "online" : "offline"}
             </p>
           </div>
         </div>

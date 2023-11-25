@@ -4,7 +4,9 @@ const AsyncWrapper = require("../utils/AsyncWrapper");
 const { BadRequestError, NotFoundError } = require("../errors");
 
 module.exports.getAllUsers = AsyncWrapper(async (req, res) => {
-  const users = await User.find({});
+  const users = await User.find({
+    _id: { $ne: req.userId },
+  });
 
   res.status(StatusCodes.OK).json({
     success: true,

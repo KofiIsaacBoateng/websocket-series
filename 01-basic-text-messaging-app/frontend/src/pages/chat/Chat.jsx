@@ -13,12 +13,12 @@ import animationData from "../../assets/lottie/lottie-04.json";
 import { useChatContext } from "./context/ChatContext";
 
 function Chat() {
+  const { selectedChat } = useChatContext();
   const defaultLottieOptions = {
     loop: true,
     autoplay: true,
     animationData: animationData,
   };
-  const { selectedChat } = useChatContext();
   return (
     <div className="main">
       {/**** sidebar */}
@@ -39,7 +39,7 @@ function Chat() {
               </h2>
             </>
           ) : (
-            <Conversation chat={selectedChat} />
+            <Conversation />
           )}
         </div>
       </div>

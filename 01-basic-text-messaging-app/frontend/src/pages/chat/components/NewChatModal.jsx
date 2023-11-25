@@ -1,23 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "../../../components/Image";
-import axios from "axios";
 import { useUserContext } from "../../../context/UserContext";
 import useGetUsers from "../../../hooks/useGetUsers";
 
 // css
 import "../styles/new-chat-modal.styles.css";
+import useSelectedChats from "../../../hooks/useSelectedChats";
+import { useChatContext } from "../context/ChatContext";
 
-function NewChatModal({ chats }) {
-  const { user } = useUserContext();
+function NewChatModal({ setOpenNewChatModal }) {
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState([]);
-  const [loading, fetchUsers] = useGetUsers();
+  const { loading: usersLoading, fetchUsers } = useGetUsers();
+  const { loading: chatLoading, getChat } = useSelectedChats();
+  const { setConversationOther } = useChatContext();
   const inputRef = useRef(null);
 
   useEffect(() => {
     // inputRef.current?.focus(); ==> set focus based on render change factor
     fetchUsers(setUsers);
   }, []);
+
+  const updateConversation = (user) => {
+    getChat(user._id);
+    setConversationOther(user);
+    setOpenNewChatModal(false);
+  };
 
   return (
     <div className="add-chat">
@@ -40,7 +48,10 @@ function NewChatModal({ chats }) {
       {/*** users */}
       <div className="add-chat-users">
         {users.map((user) => (
-          <div className="add-chat-users-list">
+          <div
+            onClick={() => updateConversation(user)}
+            className="add-chat-users-list"
+          >
             {/**** photo */}
             <Image
               style={{ width: "15%", aspectRatio: 1 }}

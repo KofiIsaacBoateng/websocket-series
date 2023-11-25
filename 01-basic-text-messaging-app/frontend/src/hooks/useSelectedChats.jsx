@@ -13,10 +13,8 @@ function useSelectedChats() {
     setLoading((prev) => true);
     try {
       const {
-        data: {
-          success,
-          data: { chat, messages },
-        },
+        data: { success, data },
+        chat,
       } = await axios.get(`/api/v1/message/${receiverId}`, {
         headers: {
           "Content-Type": "application/json",
@@ -24,11 +22,10 @@ function useSelectedChats() {
         },
       });
 
-      console.log(chat);
-
       if (success) {
-        setMessages((prev) => messages);
-        updateSelectedChat(chat);
+        console.log(data);
+        setMessages((prev) => data.messages);
+        updateSelectedChat({ ...data, messages: undefined });
       }
     } catch ({
       response: {
@@ -40,7 +37,7 @@ function useSelectedChats() {
 
     setLoading((prev) => true);
   };
-  return [loading, getChat];
+  return { loading, getChat };
 }
 
 export default useSelectedChats;

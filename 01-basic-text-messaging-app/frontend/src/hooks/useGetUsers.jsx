@@ -26,7 +26,7 @@ function useGetUsers() {
       toast.error("Couldn't fetch users! Please try again.");
     }
   };
-  return [loading, fetchUsers];
+  return { loading, fetchUsers };
 }
 
 export default useGetUsers;

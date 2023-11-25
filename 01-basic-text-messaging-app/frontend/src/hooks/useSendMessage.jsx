@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useUserContext } from "../context/UserContext";
 import { useChatContext } from "../pages/chat/context/ChatContext";
 import { toast } from "react-hot-toast";
