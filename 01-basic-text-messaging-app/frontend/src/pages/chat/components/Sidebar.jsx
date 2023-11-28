@@ -9,9 +9,11 @@ import { IoCallOutline } from "react-icons/io5"; // call
 import { IoSettingsOutline } from "react-icons/io5"; // settings
 import NavIcons from "./NavIcons";
 import Image from "../../../components/Image";
+import { useUserContext } from "../../../context/UserContext";
 
 function Sidebar() {
   const [active, setActive] = useState("chat");
+  const { user } = useUserContext();
   return (
     <div className="sidebar">
       {/*** logo */}
@@ -21,45 +23,47 @@ function Sidebar() {
       </div>
       {/*** nav icons */}
       {/**** add */}
-      <NavIcons
-        active={active}
-        setActive={setActive}
-        name="add"
-        icon={<GoPlus size={18} color="#fffa" />}
-        badge={null}
-      />
-      {/**** status */}
-      <NavIcons
-        active={active}
-        setActive={setActive}
-        name="story"
-        icon={<LuCircleDotDashed size={18} color="#fffa" />}
-        badge={null}
-      />
-      {/**** chat */}
-      <NavIcons
-        active={active}
-        setActive={setActive}
-        icon={<BsChatText size={18} color="#fffa" />}
-        badge={8}
-        name="chat"
-      />
-      {/**** community */}
-      <NavIcons
-        active={active}
-        setActive={setActive}
-        icon={<IoPeopleOutline size={18} color="#fffa" />}
-        badge={12}
-        name="community"
-      />
-      {/*** call */}
-      <NavIcons
-        active={active}
-        setActive={setActive}
-        name="call"
-        icon={<IoCallOutline size={18} color="#fffa" />}
-        badge={2}
-      />
+      <div className="sidebar-main">
+        <NavIcons
+          active={active}
+          setActive={setActive}
+          name="add"
+          icon={<GoPlus size={18} color="#fffa" />}
+          badge={null}
+        />
+        {/**** status */}
+        <NavIcons
+          active={active}
+          setActive={setActive}
+          name="story"
+          icon={<LuCircleDotDashed size={18} color="#fffa" />}
+          badge={null}
+        />
+        {/**** chat */}
+        <NavIcons
+          active={active}
+          setActive={setActive}
+          icon={<BsChatText size={18} color="#fffa" />}
+          badge={8}
+          name="chat"
+        />
+        {/**** community */}
+        <NavIcons
+          active={active}
+          setActive={setActive}
+          icon={<IoPeopleOutline size={18} color="#fffa" />}
+          badge={12}
+          name="community"
+        />
+        {/*** call */}
+        <NavIcons
+          active={active}
+          setActive={setActive}
+          name="call"
+          icon={<IoCallOutline size={18} color="#fffa" />}
+          badge={2}
+        />
+      </div>
 
       {/*** bottom icons */}
       <div className="sidebar-footer">
@@ -69,7 +73,7 @@ function Sidebar() {
         />
         {/*** profile */}
         <Image
-          src="https://avatar.iran.liara.run/public/boy"
+          src={user.profile}
           alt="profile"
           style={{
             width: "50%",

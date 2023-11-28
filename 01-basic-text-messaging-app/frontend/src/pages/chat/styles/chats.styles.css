@@ -18,21 +18,30 @@
   width: 60px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
   padding-top: 10px;
+  overflow-y: scroll
 }
 
 .logo {
   width: 70%;
-  aspect-ratio: 1;
-  padding: 15px 0;
-  border-radius: 10px;
+  padding: 8px 0;
+  border-radius: 5px;
   background-color: #0c359e;
   display: flex;
   align-items: center;
   justify-content: center;
-  align-self: center;
-  margin-bottom: 20px;
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+
+.sidebar-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 25px;
+  /* overflow-y: scroll */
 }
 
 .nav-icon {
@@ -90,16 +99,14 @@
 }
 
 .sidebar-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  width: 100%;
+  margin-top: auto;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 25px;
   align-items: center;
   justify-content: center;
-  padding-bottom: 20px;
+  padding: 10px 0 10px;
 }
 
 /**** CHAT LISTS ONLY */

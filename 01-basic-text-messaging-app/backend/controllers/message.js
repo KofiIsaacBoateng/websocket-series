@@ -33,7 +33,6 @@ const getMessages = AsyncWrapper(async (req, res) => {
 });
 
 const getConversation = AsyncWrapper(async (req, res) => {
-  console.log(req.userId);
   const conversations = await Chat.find({
     users: { $in: [req.userId] },
   }).populate("users");
