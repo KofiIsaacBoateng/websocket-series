@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import Image from "../../../components/Image";
 import { useUserContext } from "../../../context/UserContext";
+import { useChatContext } from "../context/ChatContext";
 
 function Message({ message }) {
   const { user } = useUserContext();
+  const { selectedChat } = useChatContext();
   const messageRef = useRef(null);
   const date = new Date(message.createdAt);
   const timestamp = `${date.getHours()} : ${date.getMinutes()}`;
@@ -23,11 +25,10 @@ function Message({ message }) {
         src={
           message.sender._id === user._id
             ? user.profile
-            : message.receiver.profile
+            : selectedChat.users.profile
         }
         style={{
-          flex: 0.1,
-          width: 100,
+          width: 30,
           aspectRatio: 1,
           borderRadius: 100,
           alignSelf: "flex-end",

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChatSelect from "./ChatSelect";
-import chats from "../helper/propChat";
 import NewChatModal from "./NewChatModal";
 
 /*** ICONS */
@@ -9,10 +8,22 @@ import { FiSun } from "react-icons/fi"; // theme
 import { CiSearch } from "react-icons/ci"; // search
 import { FaRegPenToSquare } from "react-icons/fa6"; // add chat
 import { IoFilter } from "react-icons/io5";
+import { useChatContext } from "../context/ChatContext";
+import { useUserContext } from "../../../context/UserContext";
+import useGetConversations from "../../../hooks/useGetConversations";
 
 function ChatList() {
   const [search, setSearch] = useState("");
   const [openNewChatModal, setOpenNewChatModal] = useState(false);
+  const { conversations } = useChatContext();
+  const { user } = useUserContext();
+  const { getConversations } = useGetConversations();
+
+  useEffect(() => {
+    if (user._id) {
+      getConversations(user);
+    }
+  }, [user]);
 
   return (
     <div className="chat-list">
@@ -54,8 +65,8 @@ function ChatList() {
       </div>
       {/*** chat lists */}
       <div className={`chat-list-chats `}>
-        {chats.map((item, index) => (
-          <ChatSelect key={index} chat={item} />
+        {conversations.map((item, index) => (
+          <ChatSelect key={index} conversation={item} />
         ))}
       </div>
     </div>

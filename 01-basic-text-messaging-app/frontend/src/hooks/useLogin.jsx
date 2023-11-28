@@ -17,7 +17,6 @@ function useLogin() {
       if (success) {
         updateUser({ ...resData, token });
         toast.success("Logged in successfully. Enjoy!");
-        console.log(resData);
       }
     } catch ({
       response: {

@@ -32,6 +32,18 @@ const getMessages = AsyncWrapper(async (req, res) => {
   });
 });
 
+const getConversation = AsyncWrapper(async (req, res) => {
+  console.log(req.userId);
+  const conversations = await Chat.find({
+    users: { $in: [req.userId] },
+  }).populate("users");
+
+  res.status(StatusCodes.OK).json({
+    success: true,
+    data: conversations,
+  });
+});
+
 const createMessage = AsyncWrapper(async (req, res) => {
   const { receiver, message, chatId } = req.body;
   const sender = req.userId;
@@ -60,4 +72,5 @@ const createMessage = AsyncWrapper(async (req, res) => {
 module.exports = {
   createMessage,
   getMessages,
+  getConversation,
 };

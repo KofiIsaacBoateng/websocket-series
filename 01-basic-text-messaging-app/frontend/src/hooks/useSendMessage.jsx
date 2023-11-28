@@ -11,7 +11,7 @@ function useSendMessage() {
 
   const sendMessage = async (message) => {
     setLoading(true);
-    const receiver = selectedChat.users.find((person) => person !== user._id);
+    const receiver = selectedChat.users;
     const chatId = selectedChat._id;
     try {
       const {
@@ -27,6 +27,7 @@ function useSendMessage() {
         }
       );
       if (success) {
+        console.log(data);
         updateMessages(data);
       }
     } catch ({
@@ -39,7 +40,7 @@ function useSendMessage() {
 
     setLoading(false);
   };
-  return [loading, sendMessage];
+  return { loading, sendMessage };
 }
 
 export default useSendMessage;

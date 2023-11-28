@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Image from "../../../components/Image";
 import Lottie from "react-lottie";
 import animationData from "../../../assets/lottie/lottie-08.json";
@@ -18,14 +18,29 @@ import { useUserContext } from "../../../context/UserContext";
 
 function Conversation() {
   const [message, setMessage] = useState("");
-  const { user } = useUserContext();
-  const { selectedChat, messages, conversationOther } = useChatContext();
-  const [loading, sendMessage] = useSendMessage();
+  const inputRef = useRef(null);
+  const { selectedChat, messages } = useChatContext();
+  const { loading: messageLoading, sendMessage } = useSendMessage();
 
   const defaultLottieOptions = {
     loop: true,
     autoplay: true,
     animationData: animationData,
+  };
+
+  const handleEnterPressed = (event) => {
+    if (event.keyCode === 13) {
+      // enter is pressed
+      if (message.length === 0) return;
+
+      sendMessage(message);
+      setMessage("");
+    }
+  };
+
+  const send = () => {
+    sendMessage(message);
+    setMessage("");
   };
 
   return (
@@ -36,7 +51,7 @@ function Conversation() {
         <div className="message-panel-header-profile">
           {/*** profile image */}
           <Image
-            src={conversationOther.profile}
+            src={selectedChat.users.profile}
             style={{
               width: 37,
               aspectRatio: 1,
@@ -53,7 +68,7 @@ function Conversation() {
           {/*** name / online status */}
           <div className="message-panel-header-profile-name-online">
             <p className="message-panel-header-profile-name">
-              {conversationOther.name}
+              {selectedChat.users.name}
             </p>
             <p
               className={`message-panel-header-profile-online ${
@@ -88,7 +103,7 @@ function Conversation() {
         <div className="message-panel-main">
           <Lottie style={{ height: 200 }} options={defaultLottieOptions} />
           <h2 className="conversation-messages-lottie-message">
-            Say hello to {selectedChat.name}
+            Say hello to {selectedChat.users.name}
           </h2>
         </div>
       )}
@@ -105,21 +120,20 @@ function Conversation() {
         </div>
         {/*** text box */}
         <input
+          ref={inputRef}
+          autoComplete="off"
           type="text"
           placeholder="Type a message"
           name="message"
           value={message}
           onChange={(_e) => setMessage((prev) => _e.target.value)}
+          onKeyDown={handleEnterPressed}
           className="message-panel-footer-message"
         />
         {/*** record / send */}
         <div className="message-panel-footer-icons">
           {message.length > 0 ? (
-            <VscSend
-              onClick={() => sendMessage(message)}
-              size={17}
-              color="#fffd"
-            />
+            <VscSend onClick={send} size={17} color="#fffd" />
           ) : (
             <HiOutlineMicrophone size={17} color="#fffd" />
           )}

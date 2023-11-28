@@ -14,7 +14,6 @@ function useSelectedChats() {
     try {
       const {
         data: { success, data },
-        chat,
       } = await axios.get(`/api/v1/message/${receiverId}`, {
         headers: {
           "Content-Type": "application/json",
@@ -24,8 +23,11 @@ function useSelectedChats() {
 
       if (success) {
         console.log(data);
+        const receiver = data.users.filter(
+          (person) => person._id !== user._id
+        )[0];
         setMessages((prev) => data.messages);
-        updateSelectedChat({ ...data, messages: undefined });
+        updateSelectedChat({ ...data, users: receiver, messages: undefined });
       }
     } catch ({
       response: {

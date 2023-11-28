@@ -1,18 +1,20 @@
 import React from "react";
 import Image from "../../../components/Image";
 import { useChatContext } from "../context/ChatContext";
+import useSelectedChats from "../../../hooks/useSelectedChats";
 
-function ChatSelect({ chat }) {
-  const { selectedChat, updateSelectedChat } = useChatContext();
+function ChatSelect({ conversation }) {
+  const { selectedChat } = useChatContext();
+  const { getChat } = useSelectedChats();
   return (
     <div
       className={`chat-list-chats-chat ${
-        chat.id === selectedChat?.id && "chat-list-chats-chat-active"
+        conversation.id === selectedChat?._id && "chat-list-chats-chat-active"
       }`}
-      onClick={() => updateSelectedChat(chat)}
+      onClick={() => getChat(conversation.users._id)}
     >
       <Image
-        src={chat.profile}
+        src={conversation.users.profile}
         style={{
           aspectRatio: 1,
           borderRadius: 100,
@@ -24,25 +26,25 @@ function ChatSelect({ chat }) {
           objectFit: "cover",
           borderRadius: 50,
         }}
-        status={chat.onlineStatus}
+        status={false}
       />
       <div className="chat-list-chats-chat-overview">
-        <h5 className="chat-list-chats-chat-overview-name">{chat.name}</h5>
+        <h5 className="chat-list-chats-chat-overview-name">
+          {conversation.users.name}
+        </h5>
         <p className="chat-list-chats-chat-overview-recent">
-          {chat.recentMessage}
+          Recent Message {/*** to be updated */}
         </p>
       </div>
       <div className="chat-list-chats-chat-details">
-        <div className="chat-list-chats-chat-details-time">
-          {chat.recentMessageTime}
-        </div>
-        {chat.numberOfNewMessages && chat.numberOfNewMessages > 0 ? (
+        <div className="chat-list-chats-chat-details-time">05:13</div>
+        {/* {chat.numberOfNewMessages && chat.numberOfNewMessages > 0 ? (
           <div className="chat-list-chats-chat-details-badge">
             {chat.numberOfNewMessages}
           </div>
         ) : (
-          <></>
-        )}
+          <></> */}
+        {/* )} */}
       </div>
     </div>
   );

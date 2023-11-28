@@ -1,12 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import initialMessages from "../helper/messages";
 
 const Chat = createContext();
 
 function ChatContext({ children }) {
   const [selectedChat, setSelectedChat] = useState(undefined);
-  const [conversationOther, setConversationOther] = useState(undefined);
-  const [messages, setMessages] = useState([...initialMessages]);
+  const [messages, setMessages] = useState([]);
+  const [conversations, setConverse] = useState([]);
 
   const updateSelectedChat = (chat) => {
     setSelectedChat((prev) => chat);
@@ -28,8 +27,8 @@ function ChatContext({ children }) {
         messages,
         updateMessages,
         setMessages,
-        conversationOther,
-        setConversationOther,
+        conversations,
+        setConverse,
       }}
     >
       {children}

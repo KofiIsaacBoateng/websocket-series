@@ -84,6 +84,7 @@
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 20px;
   padding: 0 30px;
   padding-bottom: 40px;
@@ -91,13 +92,19 @@
 
 .message {
   color: #fffc;
-  max-width: 25%;
+  min-width: 120px;
+  max-width: 90%;
+  width: fit-content;
   display: flex;
   gap: 5px;
 }
 
 .receiver .message-text-container {
   background-color: #333043;
+}
+
+.receiver {
+  margin-right: auto;
 }
 
 .sender {

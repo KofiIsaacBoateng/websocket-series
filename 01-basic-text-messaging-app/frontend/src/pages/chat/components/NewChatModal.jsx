@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "../../../components/Image";
-import { useUserContext } from "../../../context/UserContext";
 import useGetUsers from "../../../hooks/useGetUsers";
 
 // css
