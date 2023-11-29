@@ -15,15 +15,13 @@ const getMessages = AsyncWrapper(async (req, res) => {
   // get chat the messages belong to
   let chat = await Chat.findOne({
     users: { $all: [userId, receiverId] },
-  })
-    .populate("users")
-    .populate("messages");
+  }).populate("messages");
 
   // create a new chat if the chat doesn't exist
   if (!chat) {
     chat = await Chat.create({ users: [userId, receiverId] });
 
-    await chat.populate("users").populate("messages");
+    await chat.populate("messages");
   }
 
   res.status(StatusCodes.OK).json({
@@ -35,7 +33,7 @@ const getMessages = AsyncWrapper(async (req, res) => {
 const getConversation = AsyncWrapper(async (req, res) => {
   const conversations = await Chat.find({
     users: { $in: [req.userId] },
-  }).populate("users");
+  });
 
   res.status(StatusCodes.OK).json({
     success: true,
@@ -68,8 +66,24 @@ const createMessage = AsyncWrapper(async (req, res) => {
   });
 });
 
+const updateRecentMessages = AsyncWrapper(async (req, res) => {
+  const messageId = req.body;
+  const chatId = req.params;
+  const chat = await Chat.findByIdAndUpdate(
+    chatId,
+    { recent: messageId },
+    { new: true, runValidators: true }
+  );
+
+  res.status(StatusCodes.OK).json({
+    success: true,
+    data: chat,
+  });
+});
+
 module.exports = {
   createMessage,
   getMessages,
   getConversation,
+  updateRecentMessages,
 };
