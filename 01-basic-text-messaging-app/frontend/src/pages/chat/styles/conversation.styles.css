@@ -92,7 +92,7 @@
 
 .message {
   color: #fffc;
-  min-width: 120px;
+  min-width: 220px;
   max-width: 90%;
   width: fit-content;
   display: flex;

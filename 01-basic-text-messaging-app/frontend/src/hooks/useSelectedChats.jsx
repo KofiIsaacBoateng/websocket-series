@@ -22,7 +22,6 @@ function useSelectedChats() {
       });
 
       if (success) {
-        console.log(data);
         const receiver = data.users.filter(
           (person) => person._id !== user._id
         )[0];

@@ -6,7 +6,8 @@ import axios from "axios";
 
 function useSendMessage() {
   const { user } = useUserContext();
-  const { selectedChat, updateMessages } = useChatContext();
+  const { selectedChat, updateMessages, updateConversationsOnMessageSent } =
+    useChatContext();
   const [loading, setLoading] = useState(false);
 
   const sendMessage = async (message) => {
@@ -27,16 +28,40 @@ function useSendMessage() {
         }
       );
       if (success) {
-        console.log(data);
         updateMessages(data);
+        /*** update recent messages on chat */
+        const {
+          data: { success: upSuccess, data: upData },
+        } = await axios.patch(
+          `/api/v1/message/recent/${data.chatId}`,
+          {
+            messageId: data._id,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
+
+        const receiver = upData.users.filter(
+          (person) => person._id !== user._id
+        )[0];
+        if (upSuccess) {
+          updateConversationsOnMessageSent({ ...upData, users: receiver });
+        }
       }
-    } catch ({
-      response: {
-        data: { message },
-      },
-    }) {
-      toast.error(message);
+    } catch (error) {
+      console.log(error);
     }
+    // catch ({
+    //   response: {
+    //     data: { message },
+    //   },
+    // }) {
+    //   toast.error(message);
+    // }
 
     setLoading(false);
   };

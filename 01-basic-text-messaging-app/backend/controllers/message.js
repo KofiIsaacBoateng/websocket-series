@@ -67,10 +67,10 @@ const createMessage = AsyncWrapper(async (req, res) => {
 });
 
 const updateRecentMessages = AsyncWrapper(async (req, res) => {
-  const messageId = req.body;
-  const chatId = req.params;
+  const { messageId } = req.body;
+  const { chatId } = req.params;
   const chat = await Chat.findByIdAndUpdate(
-    chatId,
+    { _id: chatId },
     { recent: messageId },
     { new: true, runValidators: true }
   );

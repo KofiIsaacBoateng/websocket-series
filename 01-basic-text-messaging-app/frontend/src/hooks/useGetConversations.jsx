@@ -31,7 +31,8 @@ function useGetConversations() {
               users: receiver,
             };
           })
-          .filter((item) => item.users !== undefined);
+          .filter((item) => item.users !== undefined)
+          .filter((item) => item.recent !== undefined);
         setConverse((prev) => [...filteredData]);
       }
     } catch (error) {

@@ -200,6 +200,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
   margin: 0 auto;
   padding: 15px 20px;
   width: 92%;
@@ -208,10 +209,17 @@
   cursor: pointer;
 }
 
+.chat-list-chats-chat-det {
+  flex: 1
+}
+
 .chat-list-chats-chat-overview {
   margin-right: auto;
-  margin-left: 10px;
   color: #fffc;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .chat-list-chats-chat-overview-name {
@@ -226,15 +234,13 @@
 }
 
 .chat-list-chats-chat-details {
-  font-size: 0.8rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
+  font-size: 0.85rem;
+  letter-spacing: 0.5;
 }
 
 .chat-list-chats-chat-details-time {
-  color: #fff7;
+  color: #fffa;
+  font-size: 0.7rem;
 }
 
 .chat-list-chats-chat-details-badge {

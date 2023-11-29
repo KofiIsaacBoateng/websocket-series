@@ -16,6 +16,7 @@ const chatSchema = new mongoose.Schema(
     recent: {
       type: mongoose.Schema.ObjectId,
       ref: "Message",
+      default: undefined,
     },
   },
 
@@ -34,6 +35,7 @@ chatSchema.virtual("messages", {
 
 chatSchema.pre(/^find/, function (next) {
   this.populate("users").populate("recent");
+  next();
 });
 
 module.exports = mongoose.model("Chat", chatSchema);

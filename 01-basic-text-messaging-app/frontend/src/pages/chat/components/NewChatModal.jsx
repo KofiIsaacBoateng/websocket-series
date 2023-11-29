@@ -12,7 +12,6 @@ function NewChatModal({ setOpenNewChatModal }) {
   const [users, setUsers] = useState([]);
   const { loading: usersLoading, fetchUsers } = useGetUsers();
   const { loading: chatLoading, getChat } = useSelectedChats();
-  const { setConversationOther } = useChatContext();
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -22,7 +21,6 @@ function NewChatModal({ setOpenNewChatModal }) {
 
   const updateConversation = (user) => {
     getChat(user._id);
-    setConversationOther(user);
     setOpenNewChatModal(false);
   };
 
