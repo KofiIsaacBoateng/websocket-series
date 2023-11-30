@@ -3,6 +3,7 @@ import { useUserContext } from "../context/UserContext";
 import { useChatContext } from "../pages/chat/context/ChatContext";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import sent from "../assets/audio/sent.mp3";
 
 function useSendMessage() {
   const { user } = useUserContext();
@@ -28,7 +29,9 @@ function useSendMessage() {
         }
       );
       if (success) {
-        updateMessages(data);
+        const audio = new Audio(sent);
+        audio.play(); // play audio
+        updateMessages(data); // update message list
         /*** update recent messages on chat */
         const {
           data: { success: upSuccess, data: upData },
@@ -52,15 +55,16 @@ function useSendMessage() {
           updateConversationsOnMessageSent({ ...upData, users: receiver });
         }
       }
-    } catch (error) {
-      console.log(error);
+    } catch ({
+      response: {
+        data: { message },
+      },
+    }) {
+      toast.error(message);
     }
-    // catch ({
-    //   response: {
-    //     data: { message },
-    //   },
-    // }) {
-    //   toast.error(message);
+
+    // catch (error) {
+    //   console.log(error);
     // }
 
     setLoading(false);
