@@ -1,7 +1,16 @@
 import React, { useRef, useState } from "react";
 import Image from "../../../components/Image";
 import Lottie from "react-lottie";
-import animationData from "../../../assets/lottie/lottie-08.json";
+import hell01 from "../../../assets/lottie/lottie-08.json";
+import hell02 from "../../../assets/lottie/lottie-07.json";
+import hell03 from "../../../assets/lottie/lottie-06.json";
+import hell04 from "../../../assets/lottie/lottie-03.json";
+import hell05 from "../../../assets/lottie/lottie-04.json";
+import hell06 from "../../../assets/lottie/lottie-01.json";
+import hell07 from "../../../assets/lottie/lottie-09.json";
+import hell08 from "../../../assets/lottie/lottie-10.json";
+import animationData from "../../../assets/lottie/lottie-12.json";
+const hello = [hell01, hell02, hell03, hell04, hell05, hell06, hell07, hell08];
 
 // icons
 import { CiVideoOn } from "react-icons/ci"; // video call
@@ -25,7 +34,7 @@ function Conversation() {
   const defaultLottieOptions = {
     loop: true,
     autoplay: true,
-    animationData: animationData,
+    animationData: hello[Math.floor(Math.random() * hello.length)],
   };
 
   const handleEnterPressed = (event) => {
@@ -101,7 +110,7 @@ function Conversation() {
         <MainChat />
       ) : (
         <div className="message-panel-main">
-          <Lottie style={{ height: 200 }} options={defaultLottieOptions} />
+          <Lottie style={{ height: 300 }} options={defaultLottieOptions} />
           <h2 className="conversation-messages-lottie-message">
             Say hello to {selectedChat.users.name}
           </h2>
