@@ -69,7 +69,6 @@ module.exports.login = AsyncWrapper(async (req, res) => {
 
   // verify password
   const verifiedPassword = await user.verifyPassword(password, user.password);
-  console.log(verifiedPassword);
 
   if (!verifiedPassword) {
     throw new UnAuthorizedError("Invalid username or password");

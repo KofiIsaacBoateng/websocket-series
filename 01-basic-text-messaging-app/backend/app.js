@@ -4,10 +4,11 @@ const userRouter = require("./routes/user.js");
 const messageRouter = require("./routes/message.js");
 const errorHandler = require("./middleware/error-handler");
 const notFound = require("./middleware/not-found.js");
-
+const cors = require("cors");
 const app = express();
 
 /**** MIDDLEWARE */
+
 /**** body parser */
 app.use(express.json({ limit: "10kb" }));
 

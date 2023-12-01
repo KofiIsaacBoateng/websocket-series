@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import ChatContext from "./pages/chat/context/ChatContext.jsx";
 import UserContext from "./context/UserContext.jsx";
+import SocketContext from "./context/SocketContext.jsx";
 
 // icons
 import { FaTimesCircle } from "react-icons/fa";
@@ -16,38 +17,40 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <UserContext>
-        <ChatContext>
-          <App />
-          <Toaster
-            position="top-center"
-            toastOptions={{
-              success: {
+        <SocketContext>
+          <ChatContext>
+            <App />
+            <Toaster
+              position="top-center"
+              toastOptions={{
+                success: {
+                  duration: 3000,
+                  icon: <FaCircleCheck size={15} color="#fff" />,
+                  style: {
+                    backgroundColor: "green",
+                    color: "#fff",
+                  },
+                },
+
+                error: {
+                  duration: 3000,
+                  icon: <FaTimesCircle size={18} color="#fff" />,
+                  style: {
+                    backgroundColor: "firebrick",
+                    color: "#fff",
+                  },
+                },
+
                 duration: 3000,
-                icon: <FaCircleCheck size={15} color="#fff" />,
+                icon: <BsInfoCircleFill size={18} color="#fff" />,
                 style: {
-                  backgroundColor: "green",
+                  backgroundColor: "#131542",
                   color: "#fff",
                 },
-              },
-
-              error: {
-                duration: 3000,
-                icon: <FaTimesCircle size={18} color="#fff" />,
-                style: {
-                  backgroundColor: "firebrick",
-                  color: "#fff",
-                },
-              },
-
-              duration: 3000,
-              icon: <BsInfoCircleFill size={18} color="#fff" />,
-              style: {
-                backgroundColor: "#131542",
-                color: "#fff",
-              },
-            }}
-          />
-        </ChatContext>
+              }}
+            />
+          </ChatContext>
+        </SocketContext>
       </UserContext>
     </BrowserRouter>
   </React.StrictMode>
