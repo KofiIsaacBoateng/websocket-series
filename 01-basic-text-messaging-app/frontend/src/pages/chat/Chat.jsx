@@ -11,9 +11,12 @@ import "./styles/conversation.styles.css";
 import Lottie from "react-lottie";
 import animationData from "../../assets/lottie/lottie-04.json";
 import { useChatContext } from "./context/ChatContext";
+import useMessageListener from "../../hooks/useMessageListener";
 
 function Chat() {
   const { selectedChat } = useChatContext();
+  const { useListener } = useMessageListener();
+  useListener();
   const defaultLottieOptions = {
     loop: true,
     autoplay: true,

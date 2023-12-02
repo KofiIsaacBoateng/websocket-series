@@ -6,7 +6,8 @@ function ChatContext({ children }) {
   const [selectedChat, setSelectedChat] = useState(undefined);
   const [messages, setMessages] = useState([]);
   const [conversations, setConverse] = useState([]);
-
+  const [unreadMessages, setUnreadMessages] = useState({});
+  console.log(unreadMessages);
   useEffect(() => {
     setSelectedChat(undefined);
   }, []);
@@ -31,7 +32,6 @@ function ChatContext({ children }) {
   const updateConversationsOnMessageSent = (chat) => {
     const notChat = conversations.filter((con) => con._id !== chat._id);
     setConverse((prev) => [chat, ...notChat]);
-    setSelectedChat(chat);
   };
 
   return (
@@ -45,6 +45,7 @@ function ChatContext({ children }) {
         conversations,
         setConverse,
         updateConversationsOnMessageSent,
+        setUnreadMessages,
       }}
     >
       {children}

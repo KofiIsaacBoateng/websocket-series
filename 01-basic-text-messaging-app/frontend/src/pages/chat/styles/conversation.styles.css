@@ -35,11 +35,11 @@
 }
 
 .green {
-  color: lightgreen;
+  color: lime;
 }
 
 .gray {
-  color: #fffa;
+  color: #fff7;
 }
 
 .message-panel-header-actions {
@@ -84,7 +84,6 @@
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   gap: 20px;
   padding: 0 30px;
   padding-bottom: 40px;

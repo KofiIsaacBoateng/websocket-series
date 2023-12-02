@@ -6,12 +6,14 @@ import useGetUsers from "../../../hooks/useGetUsers";
 import "../styles/new-chat-modal.styles.css";
 import useSelectedChats from "../../../hooks/useSelectedChats";
 import { useChatContext } from "../context/ChatContext";
+import { useSocket } from "../../../context/SocketContext";
 
 function NewChatModal({ setOpenNewChatModal }) {
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState([]);
   const { loading: usersLoading, fetchUsers } = useGetUsers();
   const { loading: chatLoading, getChat } = useSelectedChats();
+  const { onlineUsers } = useSocket();
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -66,7 +68,13 @@ function NewChatModal({ setOpenNewChatModal }) {
                 @ {user.username}
               </h5>
             </div>
-            <p className="add-chat-users-list-status">offline</p>
+            <p
+              className={`add-chat-users-list-status ${
+                onlineUsers[user._id] ? "green" : "gray"
+              }`}
+            >
+              {onlineUsers[user._id] ? "online" : "offline"}
+            </p>
             {/*** name */}
 
             {/**** online status */}

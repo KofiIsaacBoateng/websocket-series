@@ -6,6 +6,7 @@ const Context = createContext();
 
 function SocketContext({ children }) {
   const [socket, setSocket] = useState(undefined);
+  const [onlineUsers, setOnlineUsers] = useState({});
   const { user } = useUserContext();
 
   useEffect(() => {
@@ -15,7 +16,10 @@ function SocketContext({ children }) {
 
       socket?.on("connect", () => {
         console.log("frontend connected");
+        socket.emit("is-online", user._id);
       });
+
+      socket.on("online", (users) => setOnlineUsers(users));
 
       return () => socket.close();
     } else {
@@ -29,6 +33,7 @@ function SocketContext({ children }) {
     <Context.Provider
       value={{
         socket,
+        onlineUsers,
       }}
     >
       {children}

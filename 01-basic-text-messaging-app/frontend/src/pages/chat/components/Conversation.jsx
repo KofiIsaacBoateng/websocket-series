@@ -24,12 +24,15 @@ import { useChatContext } from "../context/ChatContext";
 import MainChat from "./MainChat";
 import useSendMessage from "../../../hooks/useSendMessage";
 import { useUserContext } from "../../../context/UserContext";
+import { useSocket } from "../../../context/SocketContext";
 
 function Conversation() {
   const [message, setMessage] = useState("");
   const inputRef = useRef(null);
   const { selectedChat, messages } = useChatContext();
   const { loading: messageLoading, sendMessage } = useSendMessage();
+  const { onlineUsers } = useSocket();
+  const online = onlineUsers[selectedChat.users._id];
 
   const defaultLottieOptions = {
     loop: true,
@@ -81,10 +84,10 @@ function Conversation() {
             </p>
             <p
               className={`message-panel-header-profile-online ${
-                false ? "green" : "gray"
+                online ? "green" : "gray"
               }`}
             >
-              {false ? "online" : "offline"}
+              {online ? "online" : "offline"}
             </p>
           </div>
         </div>

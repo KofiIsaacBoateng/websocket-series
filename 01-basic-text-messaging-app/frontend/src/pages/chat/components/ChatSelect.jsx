@@ -2,17 +2,18 @@ import React from "react";
 import Image from "../../../components/Image";
 import { useChatContext } from "../context/ChatContext";
 import useSelectedChats from "../../../hooks/useSelectedChats";
+import { useSocket } from "../../../context/SocketContext";
 
 function ChatSelect({ conversation }) {
   const { selectedChat } = useChatContext();
   const { getChat } = useSelectedChats();
-  const date = new Date(conversation.recent.createdAt);
+  const { onlineUsers } = useSocket();
+  const date = new Date(conversation.recent?.createdAt);
   const hours = date.getHours();
   const minutes = date.getMinutes();
   const timestamp = `${hours < 10 ? "0" : ""}${hours} : ${
     minutes < 10 ? "0" : ""
   }${minutes}`;
-
   return (
     <div
       className={`chat-list-chats-chat ${
@@ -33,7 +34,7 @@ function ChatSelect({ conversation }) {
           objectFit: "cover",
           borderRadius: 50,
         }}
-        status={false}
+        status={onlineUsers[conversation.users._id]}
       />
       <div className="chat-list-chats-chat-det">
         <div className="chat-list-chats-chat-overview">
