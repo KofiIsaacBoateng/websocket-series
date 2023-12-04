@@ -17,8 +17,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <UserContext>
-        <SocketContext>
-          <ChatContext>
+        <ChatContext>
+          <SocketContext>
             <App />
             <Toaster
               position="top-center"
@@ -49,8 +49,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 },
               }}
             />
-          </ChatContext>
-        </SocketContext>
+          </SocketContext>
+        </ChatContext>
       </UserContext>
     </BrowserRouter>
   </React.StrictMode>

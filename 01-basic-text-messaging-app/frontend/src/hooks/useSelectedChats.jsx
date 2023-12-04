@@ -5,7 +5,8 @@ import { useUserContext } from "../context/UserContext";
 import { toast } from "react-hot-toast";
 
 function useSelectedChats() {
-  const { setMessages, updateSelectedChat } = useChatContext();
+  const { setMessages, updateSelectedChat, setUnreadMessages, unreadMessages } =
+    useChatContext();
   const { user } = useUserContext();
   const [loading, setLoading] = useState(false);
 
@@ -22,11 +23,14 @@ function useSelectedChats() {
       });
 
       if (success) {
-        const receiver = data.users.filter(
+        const chatUser = data.users.filter(
           (person) => person._id !== user._id
         )[0];
         setMessages((prev) => data.messages);
-        updateSelectedChat({ ...data, users: receiver, messages: undefined });
+        updateSelectedChat({ ...data, users: chatUser, messages: undefined });
+        setUnreadMessages((prev) => ({ ...prev, [chatUser._id]: [] }));
+        console.log("sender id", chatUser._id);
+        console.log("unread messages", unreadMessages);
       }
     } catch ({
       response: {

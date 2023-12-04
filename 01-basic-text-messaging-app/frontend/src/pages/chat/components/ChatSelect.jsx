@@ -5,15 +5,16 @@ import useSelectedChats from "../../../hooks/useSelectedChats";
 import { useSocket } from "../../../context/SocketContext";
 
 function ChatSelect({ conversation }) {
-  const { selectedChat } = useChatContext();
   const { getChat } = useSelectedChats();
   const { onlineUsers } = useSocket();
+  const { selectedChat, unreadMessages } = useChatContext();
   const date = new Date(conversation.recent?.createdAt);
   const hours = date.getHours();
   const minutes = date.getMinutes();
   const timestamp = `${hours < 10 ? "0" : ""}${hours} : ${
     minutes < 10 ? "0" : ""
   }${minutes}`;
+
   return (
     <div
       className={`chat-list-chats-chat ${
@@ -49,13 +50,15 @@ function ChatSelect({ conversation }) {
             {conversation.recent.message.slice(0, 22)}
             {conversation.recent.message.length > 22 ? " ..." : ""}
           </p>
-          {/* {chat.numberOfNewMessages && chat.numberOfNewMessages > 0 ? (
+          {unreadMessages &&
+          unreadMessages[conversation.users._id] &&
+          unreadMessages[conversation.users._id].length > 0 ? (
             <div className="chat-list-chats-chat-details-badge">
-              {chat.numberOfNewMessages}
+              {unreadMessages[conversation.users._id].length}
             </div>
           ) : (
-            <></> */}
-          {/* )} */}
+            <></>
+          )}
         </div>
       </div>
     </div>

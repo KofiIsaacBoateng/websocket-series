@@ -27,7 +27,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("new message", (message) => {
-    console.log(message);
     socket.to(message.receiver._id).emit("incoming", message);
   });
 

@@ -8,8 +8,7 @@ function useMessageListener() {
   const {
     updateMessages,
     selectedChat,
-    unreadMessages,
-    setUnreadMessages,
+    updateUnreadMessages,
     updateConversationsOnMessageSent,
     conversations,
   } = useChatContext();
@@ -17,31 +16,26 @@ function useMessageListener() {
   const useListener = () => {
     useEffect(() => {
       socket?.on("incoming", (message) => {
-        console.log(selectedChat);
         if (selectedChat?._id === message.chatId) {
+          // update messages and not set as unread
           updateMessages(message);
-          const audio = new Audio(incomingSound); // play new message sound
-          audio.play();
         } else {
-          //   setUnreadMessages((prev) => {
-          //     if (!unreadMessages[message.sender._id]) {
-          //       unreadMessages[message.sender._id] = [message];
-          //     } else {
-          //       unreadMessages[message.sender._id].push(message);
-          //     }
-          //   });
+          // update unread messages
+          updateUnreadMessages(message);
+          // update database as unread
         }
 
         // update conversations recent
         let chat = conversations.filter((con) => con._id === message.chatId)[0];
-        console.log("message", message);
-        console.log("conversations", conversations);
         chat.recent = message;
         updateConversationsOnMessageSent(chat);
+
+        const audio = new Audio(incomingSound); // play new message sound
+        audio.play();
       });
 
       return () => socket?.off("incoming");
-    }, [socket]);
+    });
   };
 
   return { useListener };

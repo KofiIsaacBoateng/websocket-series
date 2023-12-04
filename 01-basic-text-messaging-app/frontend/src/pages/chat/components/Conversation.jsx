@@ -9,7 +9,6 @@ import hell05 from "../../../assets/lottie/lottie-04.json";
 import hell06 from "../../../assets/lottie/lottie-01.json";
 import hell07 from "../../../assets/lottie/lottie-09.json";
 import hell08 from "../../../assets/lottie/lottie-10.json";
-import animationData from "../../../assets/lottie/lottie-12.json";
 const hello = [hell01, hell02, hell03, hell04, hell05, hell06, hell07, hell08];
 
 // icons

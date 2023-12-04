@@ -7,22 +7,39 @@ function ChatContext({ children }) {
   const [messages, setMessages] = useState([]);
   const [conversations, setConverse] = useState([]);
   const [unreadMessages, setUnreadMessages] = useState({});
-  console.log(unreadMessages);
   useEffect(() => {
     setSelectedChat(undefined);
   }, []);
 
   useEffect(() => {
-    console.log("update running");
     if (conversations.length === 0) return;
 
     setConverse((prev) =>
       prev.sort((a, b) => b.recent.createdAt - a.recent.createdAt)
     );
-  }, [messages, conversations]);
+  }, [messages, conversations, unreadMessages]);
 
   const updateSelectedChat = (chat) => {
     setSelectedChat((prev) => chat);
+  };
+
+  const updateUnreadMessages = (message) => {
+    setUnreadMessages((prev) => {
+      const senderId = message.sender._id;
+      if (prev) {
+        if (prev[senderId] !== undefined) {
+          prev[senderId].push(message);
+        } else {
+          prev[senderId] = [message];
+        }
+      } else {
+        return {
+          [senderId]: [message],
+        };
+      }
+
+      return prev;
+    });
   };
 
   const updateMessages = (message) => {
@@ -45,6 +62,8 @@ function ChatContext({ children }) {
         conversations,
         setConverse,
         updateConversationsOnMessageSent,
+        updateUnreadMessages,
+        unreadMessages,
         setUnreadMessages,
       }}
     >
