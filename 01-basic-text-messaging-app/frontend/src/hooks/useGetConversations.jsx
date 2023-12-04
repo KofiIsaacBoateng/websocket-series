@@ -7,8 +7,39 @@ import { useChatContext } from "../pages/chat/context/ChatContext";
 function useGetConversations() {
   const [loading, setLoading] = useState();
   const { setConverse } = useChatContext();
+  const { user } = useUserContext();
 
-  const getConversations = async (user) => {
+  const getOneConversation = async (message) => {
+    try {
+      const {
+        data: { success, data },
+      } = await axios.get(
+        `/api/v1/message/chat/conversation/${message.chatId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+
+      if (success) {
+        console.log("data from conversation: data");
+        return data;
+      }
+    } catch (error) {
+      console.log("error: ", error);
+    }
+    // catch ({
+    //   response: {
+    //     data: { message },
+    //   },
+    // }) {
+    //   toast.error(message || "Something went wrong.");
+    // }
+  };
+
+  const getConversations = async () => {
     setLoading(true);
     try {
       const {
@@ -35,14 +66,18 @@ function useGetConversations() {
           .filter((item) => item.recent !== undefined);
         setConverse((prev) => [...filteredData]);
       }
-    } catch (error) {
-      toast.error(message);
+    } catch ({
+      response: {
+        data: { message },
+      },
+    }) {
+      toast.error(message || "Something went wrong.");
     }
 
     setLoading(false);
   };
 
-  return { loading, getConversations };
+  return { loading, getConversations, getOneConversation };
 }
 
 export default useGetConversations;

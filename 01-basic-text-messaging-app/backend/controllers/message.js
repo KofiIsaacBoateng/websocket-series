@@ -30,14 +30,25 @@ const getMessages = AsyncWrapper(async (req, res) => {
   });
 });
 
-const getConversation = AsyncWrapper(async (req, res) => {
-  const conversations = await Chat.find({
+const getConversations = AsyncWrapper(async (req, res) => {
+  const conversation = await Chat.find({
     users: { $in: [req.userId] },
   });
 
   res.status(StatusCodes.OK).json({
     success: true,
-    data: conversations,
+    data: conversation,
+  });
+});
+
+const getOneConversation = AsyncWrapper(async (req, res) => {
+  const { chatId } = req.params;
+
+  const chat = await Chat.findById(chatId);
+
+  res.status(StatusCodes.OK).json({
+    success: true,
+    data: chat,
   });
 });
 
@@ -84,6 +95,7 @@ const updateRecentMessages = AsyncWrapper(async (req, res) => {
 module.exports = {
   createMessage,
   getMessages,
-  getConversation,
+  getConversations,
+  getOneConversation,
   updateRecentMessages,
 };

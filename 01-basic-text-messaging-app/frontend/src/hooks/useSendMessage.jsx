@@ -39,9 +39,7 @@ function useSendMessage() {
         audio.play(); // play audio
         updateMessages(data); // update message list
 
-        /**** send message in real time */
-        socket.emit("new message", data);
-        /*** update recent messages on chat */
+        /*** update recent messages on chat list */
         const {
           data: { success: upSuccess, data: upData },
         } = await axios.patch(
@@ -57,20 +55,23 @@ function useSendMessage() {
           }
         );
 
-        const receiver = upData.users.filter(
-          (person) => person._id !== user._id
-        )[0];
         if (upSuccess) {
-          updateConversationsOnMessageSent({ ...upData, users: receiver });
-          updateSelectedChat({ ...upData, users: receiver });
+          const chatUser = upData.users.filter(
+            (person) => person._id !== user._id
+          )[0];
+          updateConversationsOnMessageSent({ ...upData, users: chatUser });
+          updateSelectedChat({ ...upData, users: chatUser });
         }
+
+        /**** send message in real time */
+        socket.emit("new message", data);
       }
     } catch ({
       response: {
         data: { message },
       },
     }) {
-      toast.error(message);
+      toast.error(message || "Something went wrong!");
     }
 
     // catch (error) {

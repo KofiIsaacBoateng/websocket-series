@@ -10,6 +10,7 @@ import hell06 from "../../../assets/lottie/lottie-01.json";
 import hell07 from "../../../assets/lottie/lottie-09.json";
 import hell08 from "../../../assets/lottie/lottie-10.json";
 const hello = [hell01, hell02, hell03, hell04, hell05, hell06, hell07, hell08];
+const animationData = hello[Math.floor(Math.random() * hello.length)];
 
 // icons
 import { CiVideoOn } from "react-icons/ci"; // video call
@@ -36,7 +37,7 @@ function Conversation() {
   const defaultLottieOptions = {
     loop: true,
     autoplay: true,
-    animationData: hello[Math.floor(Math.random() * hello.length)],
+    animationData: animationData,
   };
 
   const handleEnterPressed = (event) => {

@@ -21,7 +21,7 @@ function ChatList() {
 
   useEffect(() => {
     if (user._id) {
-      getConversations(user);
+      getConversations();
     }
   }, [user]);
 
