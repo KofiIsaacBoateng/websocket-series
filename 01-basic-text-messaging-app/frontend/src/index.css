@@ -92,8 +92,14 @@ button:active {
   right: 0;
   top: 0;
   border-radius: 50%;
-  width: 10px;
+  width: 13px;
   aspect-ratio: 1;
   background-color: limegreen;
   z-index: 2;
+}
+
+@media screen and (max-width: 730px) {
+  .custom-image-img {
+    width: 20px;
+  }
 }
