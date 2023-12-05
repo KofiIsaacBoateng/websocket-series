@@ -9,7 +9,7 @@ server.listen(3500, () => console.log("server is listening on port 3500"));
 const onlineUsers = {};
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000", "http://192.168.43.14:3000"],
     methods: ["GET", "POST"],
   },
 });
