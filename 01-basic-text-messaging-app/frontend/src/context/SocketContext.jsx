@@ -11,7 +11,7 @@ function SocketContext({ children }) {
 
   useEffect(() => {
     if (user) {
-      const socket = io("http://localhost:3500");
+      const socket = io("http://192.168.43.14:3500");
       setSocket(socket);
 
       socket?.on("connect", () => {
