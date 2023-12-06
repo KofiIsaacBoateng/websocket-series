@@ -29,7 +29,11 @@ function Chat() {
       {/**** chats display */}
       <ChatList />
       {/**** messages huge box */}
-      <div className="conversation">
+      <div
+        className={`conversation ${
+          selectedChat ? "conversation-opened" : "conversation-closed"
+        }`}
+      >
         <div className="conversation-messages-lottie">
           {!selectedChat ? (
             <>

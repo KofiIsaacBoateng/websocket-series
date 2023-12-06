@@ -27,6 +27,12 @@ function ChatList() {
 
   return (
     <div className="chat-list">
+      {openNewChatModal && (
+        <div
+          onClick={() => setOpenNewChatModal(false)}
+          className="add-chat-close"
+        />
+      )}
       {/**** header */}
       <div className="chat-list-header">
         {/**** title */}
@@ -34,7 +40,7 @@ function ChatList() {
           <h4 className="chat-list-header-heading-title">Chats</h4>
           <div className="chat-list-header-right-controls">
             <div
-              onClick={() => setOpenNewChatModal((prev) => !prev)}
+              onClick={() => setOpenNewChatModal(true)}
               className="chat-list-header-right-controls-control"
             >
               <FaRegPenToSquare size={15} color="#fffa" />
