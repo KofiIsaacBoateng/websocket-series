@@ -4,6 +4,7 @@ import { useUserContext } from "../../../context/UserContext";
 const Chat = createContext();
 
 function ChatContext({ children }) {
+  const [activeSection, setActiveSection] = useState("chat");
   const [selectedChat, setSelectedChat] = useState(undefined);
   const [messages, setMessages] = useState([]);
   const [conversations, setConverse] = useState([]);
@@ -61,6 +62,8 @@ function ChatContext({ children }) {
         updateUnreadMessages,
         unreadMessages,
         setUnreadMessages,
+        activeSection,
+        setActiveSection,
       }}
     >
       {children}
