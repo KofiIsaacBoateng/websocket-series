@@ -20,6 +20,7 @@ import { LuSmilePlus } from "react-icons/lu"; // smiley
 import { GrAttachment } from "react-icons/gr"; // attachment
 import { HiOutlineMicrophone } from "react-icons/hi2"; // microphone
 import { VscSend } from "react-icons/vsc"; // send
+import { IoMdArrowRoundBack } from "react-icons/io"; // back
 import { useChatContext } from "../context/ChatContext";
 import MainChat from "./MainChat";
 import useSendMessage from "../../../hooks/useSendMessage";
@@ -29,7 +30,7 @@ import { useSocket } from "../../../context/SocketContext";
 function Conversation() {
   const [message, setMessage] = useState("");
   const inputRef = useRef(null);
-  const { selectedChat, messages } = useChatContext();
+  const { selectedChat, messages, updateSelectedChat } = useChatContext();
   const { loading: messageLoading, sendMessage } = useSendMessage();
   const { onlineUsers } = useSocket();
   const online = onlineUsers[selectedChat.users._id];
@@ -61,6 +62,13 @@ function Conversation() {
       <div className="message-panel-header">
         {/**** left */}
         <div className="message-panel-header-profile">
+          {/**** arrow back */}
+          <div
+            onClick={() => updateSelectedChat(undefined)}
+            className="message-panel-header-profile-back"
+          >
+            <IoMdArrowRoundBack size={17} color="#fffc" />
+          </div>
           {/*** profile image */}
           <Image
             src={selectedChat.users.profile}
@@ -76,6 +84,7 @@ function Conversation() {
               objectFit: "cover",
               borderRadius: 50,
             }}
+            customClassName="message-panel-header-profile-img"
           />
           {/*** name / online status */}
           <div className="message-panel-header-profile-name-online">

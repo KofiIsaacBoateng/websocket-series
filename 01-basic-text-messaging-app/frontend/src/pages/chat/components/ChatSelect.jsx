@@ -27,7 +27,7 @@ function ChatSelect({ conversation }) {
         style={{
           aspectRatio: 1,
           borderRadius: 100,
-          width: "18%",
+          width: 50,
         }}
         imageStyle={{
           width: "100%",
