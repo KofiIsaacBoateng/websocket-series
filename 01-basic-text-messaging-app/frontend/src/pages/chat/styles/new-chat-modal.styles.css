@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: min(300px, 90vw);
-  height: min(500px, 70vh);
+  height: min(500px, 80vh);
   z-index: 2;
   position: absolute;
   top: 110%;
@@ -11,7 +11,27 @@
   border-radius: 10px;
   box-shadow: 0 0 5px 0.5px #0003;
   padding: 15px 25px 0;
+  z-index: 4;
   animation: slide-down 0.2s ease-in;
+}
+
+.add-chat-close {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  z-index: 3;
+  background-color: #0004;
+}
+
+@media screen and (max-width: 730px) {
+  .add-chat {
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: slide-down-center 0.2s ease-in;
+  }
 }
 
 .add-chat-heading {
@@ -99,6 +119,20 @@ input::placeholder {
 
   100% {
     transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@keyframes slide-down-center {
+  0% {
+    transform: translate(-50%, -60%);
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(-50%, -55%);
     visibility: visible;
     opacity: 1;
   }

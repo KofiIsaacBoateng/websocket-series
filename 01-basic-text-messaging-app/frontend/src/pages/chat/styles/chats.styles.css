@@ -7,7 +7,7 @@
 .sidebar,
 .chat-list,
 .conversation {
-  height: 100vh;
+  height: 100dvh
 }
 
 /**** SIDEBAR ONLY */
@@ -16,6 +16,7 @@
   position: relative;
   background-color: #030420;
   width: 60px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   padding-top: 10px;
@@ -113,13 +114,16 @@
 
 .chat-list {
   background-color: #191a3e;
-  width: min(85%, 300px);
+  min-width: 280px;
+  max-width: 300px;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 730px) {
   .chat-list {
+    max-width: none;
     flex: 1;
   }
 }
@@ -142,6 +146,12 @@
 .chat-list-header-right-controls {
   display: flex;
   position: relative;
+}
+
+@media screen and (max-width: 730px) {
+  .chat-list-header-right-controls {
+    position: unset;
+  }
 }
 
 .chat-list-header-right-controls-control {
@@ -268,13 +278,24 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex: 1;
-  height: 100vh;
-  margin-left: 5px;
+  flex-grow: 1;
+  height: 100dvh;
+  margin-left: 3px;
+  z-index: 4;
+  overflow: hidden;
 }
 
-@media screen and (max-width: 550px) {
-  .conversation {
+@media screen and (max-width: 730px) {
+  .conversation.conversation-opened {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    margin: 0;
+  }
+
+  .conversation.conversation-closed {
     display: none;
   }
 }

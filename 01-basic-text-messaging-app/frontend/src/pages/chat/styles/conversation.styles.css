@@ -25,6 +25,10 @@
   gap: 10px;
 }
 
+.message-panel-header-profile-back {
+  display: none;
+}
+
 .message-panel-header-profile-name {
   font-size: 0.9rem;
   margin-bottom: 5px;
@@ -67,6 +71,20 @@
   background-color: #fff5;
 }
 
+@media screen and (max-width: 730px) {
+  .custom-image.message-panel-header-profile-img {
+    width: 20px;
+  }
+
+  .message-panel-header-profile-back {
+    display: block;
+  }
+
+  .message-panel-header-profile-name {
+    font-size: 0.8rem;
+  }
+}
+
 /***** MESSAGE PANEL ***/
 
 .message-panel-main {
@@ -85,7 +103,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 0 30px;
+  padding: 15px 10px;
   padding-bottom: 40px;
 }
 
@@ -130,6 +148,16 @@
   margin-left: auto;
 }
 
+@media screen and (max-width: 730px) {
+  .message-panel-main-chat {
+    padding: 15px;
+  }
+
+  .message-panel-main {
+    flex-shrink: 1;
+  }
+}
+
 /***** FOOTER SECTION **/
 
 .message-panel-footer {
@@ -139,6 +167,7 @@
   align-items: center;
   gap: 10px;
   padding: 0 15px;
+  width: 100vw;
 }
 
 .message-panel-footer-icons {
@@ -165,4 +194,36 @@
 .message-panel-footer-message::placeholder {
   color: #fff7;
   font-size: 0.9rem;
+}
+
+@media screen and (max-width: 730px) {
+  .message-panel-footer {
+    max-width: 100vw;
+    overflow: hidden;
+    padding: 0 15px 0 5px;
+    width: 100vw;
+  }
+
+  .message-panel-footer-message,
+  .message-panel-footer-message::placeholder {
+    font-size: 0.7rem;
+  }
+
+  .message-panel-footer-message {
+    padding: 20px 5px;
+    flex-shrink: 1;
+  }
+
+  .message-panel-footer-icons {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  }
+
+  .message-panel-footer-icons:last-child {
+    margin-left: auto;
+  }
 }
