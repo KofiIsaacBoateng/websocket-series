@@ -28,7 +28,12 @@ function useSelectedChats() {
         )[0];
         setMessages((prev) => data.messages);
         updateSelectedChat({ ...data, users: chatUser, messages: undefined });
-        setUnreadMessages((prev) => ({ ...prev, [chatUser._id]: [] }));
+        if (unreadMessages && unreadMessages[chatUser._id]) {
+          setUnreadMessages((prev) => {
+            delete prev[chatUser._id];
+            return prev;
+          });
+        }
       }
     } catch ({
       response: {

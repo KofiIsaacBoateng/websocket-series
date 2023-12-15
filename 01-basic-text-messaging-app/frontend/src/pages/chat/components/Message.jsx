@@ -8,7 +8,11 @@ function Message({ message }) {
   const { selectedChat } = useChatContext();
   const messageRef = useRef(null);
   const date = new Date(message.createdAt);
-  const timestamp = `${date.getHours()} : ${date.getMinutes()}`;
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const timestamp = `${hours < 10 ? "0" : ""}${hours} : ${
+    minutes < 10 ? "0" : ""
+  }${minutes}`;
 
   useEffect(() => {
     messageRef.current?.scrollIntoView({ behavior: "instant" });

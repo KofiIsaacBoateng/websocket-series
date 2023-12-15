@@ -35,6 +35,7 @@ chatSchema.virtual("messages", {
 
 chatSchema.pre(/^find/, function (next) {
   this.populate("users").populate("recent");
+  this.sort("-recent");
   next();
 });
 

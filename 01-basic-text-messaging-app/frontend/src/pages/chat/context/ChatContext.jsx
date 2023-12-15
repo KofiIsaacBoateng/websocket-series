@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useUserContext } from "../../../context/UserContext";
 
 const Chat = createContext();
 
@@ -6,26 +7,21 @@ function ChatContext({ children }) {
   const [selectedChat, setSelectedChat] = useState(undefined);
   const [messages, setMessages] = useState([]);
   const [conversations, setConverse] = useState([]);
-  const [unreadMessages, setUnreadMessages] = useState({});
+  const [unreadMessages, setUnreadMessages] = useState(undefined);
+
   useEffect(() => {
     setSelectedChat(undefined);
   }, []);
-
-  useEffect(() => {
-    if (conversations.length === 0) return;
-
-    setConverse((prev) =>
-      prev.sort((a, b) => b.recent.createdAt - a.recent.createdAt)
-    );
-  }, [messages, conversations, unreadMessages]);
 
   const updateSelectedChat = (chat) => {
     setSelectedChat((prev) => chat);
   };
 
   const updateUnreadMessages = (message) => {
+    console.log("unread run");
     setUnreadMessages((prev) => {
       const senderId = message.sender._id;
+
       if (prev) {
         if (prev[senderId] !== undefined) {
           prev[senderId].push(message);

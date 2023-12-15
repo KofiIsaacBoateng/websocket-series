@@ -21,7 +21,10 @@ function SocketContext({ children }) {
 
       socket.on("online", (users) => setOnlineUsers(users));
 
-      return () => socket.close();
+      return () => {
+        socket?.off("online");
+        socket.close();
+      };
     } else {
       if (socket) {
         socket.close();

@@ -11,7 +11,6 @@ function useMessageListener() {
   const { user } = useUserContext();
   const {
     updateMessages,
-    messages,
     selectedChat,
     updateUnreadMessages,
     updateConversationsOnMessageSent,
@@ -34,7 +33,6 @@ function useMessageListener() {
         let chat = conversations.filter((con) => con._id === message.chatId)[0];
         if (!chat) {
           chat = await getOneConversation(message);
-          console.log("chat from listener", chat);
           chat.users = chat.users.filter(
             (person) => person._id !== user._id
           )[0];
@@ -46,7 +44,6 @@ function useMessageListener() {
         const audio = new Audio(incomingSound); // play new message sound
         audio.play();
       });
-
       return () => socket?.off("incoming");
     });
   };
