@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { IoMdChatbubbles } from "react-icons/io"; // logo
 import { GoPlus } from "react-icons/go"; // plus
 import { CgStories } from "react-icons/cg"; // stories
-import { IoChatbubblesOutline } from "react-icons/io5"; // chat
+import { LuCircleDotDashed } from "react-icons/lu"; // stories 2.0
+import { BsChatText } from "react-icons/bs"; // chat
 import { IoPeopleOutline } from "react-icons/io5"; // community
 import { IoCallOutline } from "react-icons/io5"; // call
 import { IoSettingsOutline } from "react-icons/io5"; // settings
@@ -32,14 +33,14 @@ function Sidebar() {
         active={active}
         setActive={setActive}
         name="story"
-        icon={<CgStories size={20} color="#fffa" />}
+        icon={<LuCircleDotDashed size={20} color="#fffa" />}
         badge={null}
       />
       {/**** chat */}
       <NavIcons
         active={active}
         setActive={setActive}
-        icon={<IoChatbubblesOutline size={20} color="#fffa" />}
+        icon={<BsChatText size={20} color="#fffa" />}
         badge={8}
         name="chat"
       />

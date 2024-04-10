@@ -51,7 +51,7 @@
 
 .badge {
   position: absolute;
-  top: -8px;
+  top: -5px;
   right: -8px;
   width: 15px;
   height: 15px;
@@ -168,7 +168,7 @@
   padding: 15px 20px;
   width: 92%;
   background-color: #2b264f;
-  border-radius: 15px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
@@ -225,9 +225,7 @@
   justify-content: space-between;
   flex: 1;
   height: 100vh;
-  padding-right: 20px;
-  padding-bottom: 10px;
-  margin-left: 20px;
+  margin-left: 5px;
 }
 
 @media screen and (max-width: 550px) {

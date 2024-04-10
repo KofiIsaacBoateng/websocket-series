@@ -7,10 +7,10 @@ import ChatContext from "./pages/chat/context/ChatContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ChatContext>
-      <BrowserRouter>
+    <BrowserRouter>
+      <ChatContext>
         <App />
-      </BrowserRouter>
-    </ChatContext>
+      </ChatContext>
+    </BrowserRouter>
   </React.StrictMode>
 );
